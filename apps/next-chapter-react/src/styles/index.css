@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.dark {
+  @apply bg-background-default text-white;
+}
+
+a{
+  @apply text-primary-main no-underline;
+}
