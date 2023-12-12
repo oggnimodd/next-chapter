@@ -85,3 +85,20 @@ export const findReview = async (ctx: AuthenticatedContext, id: string) => {
 
   return review;
 };
+
+export const findNote = async (ctx: AuthenticatedContext, id: string) => {
+  const note = await ctx.prisma.note.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!note) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Note not found",
+    });
+  }
+
+  return note;
+};
