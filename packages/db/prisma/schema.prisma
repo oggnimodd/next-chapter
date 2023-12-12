@@ -12,18 +12,19 @@ datasource db {
 }
 
 model Book {
-  id          String  @id @unique @default(uuid())
-  title       String
-  description String?
-  author      String?
-  cover       String?
-  progress    Int?
-  shelf       Shelf   @relation(fields: [shelfId], references: [id])
-  userId      String
-  notes       Note[]
-  review      Review? @relation(fields: [reviewId], references: [id])
-  shelfId     String
-  reviewId    String?
+  id             String  @id @unique @default(uuid())
+  title          String
+  description    String?
+  author         String?
+  cover          String?
+  progress       Int?
+  shelf          Shelf   @relation(fields: [shelfId], references: [id])
+  userId         String
+  notes          Note[]
+  review         Review? @relation(fields: [reviewId], references: [id])
+  shelfId        String
+  reviewId       String?
+  googleBooksUrl String?
 }
 
 model Shelf {
