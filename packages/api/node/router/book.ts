@@ -6,7 +6,7 @@ import { isAuthorized } from "../middlewares";
 import { findBook, findBooks, findShelf } from "../helpers";
 
 export const bookRouter = createTRPCRouter({
-  all: protectedProcedure.query(({ ctx }) => {
+  getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.book.findMany({
       where: {
         userId: ctx.auth.userId,
