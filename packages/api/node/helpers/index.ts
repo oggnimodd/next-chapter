@@ -52,7 +52,10 @@ export const findBook = async (ctx: AuthenticatedContext, id: string) => {
   return book;
 };
 
-export const findBooks = async (ctx: AuthenticatedContext, shelfId: string) => {
+export const findBooksInShelf = async (
+  ctx: AuthenticatedContext,
+  shelfId: string,
+) => {
   const books = await ctx.prisma.book.findMany({
     where: {
       shelfId,

@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { createBookInput } from "models";
+import { createBookInput, updateBookInput } from "models";
 import { TRPCError } from "@trpc/server";
 import { isAuthorized } from "../middlewares";
-import { findBook, findBooks, findShelf } from "../helpers";
+import { findBook, findBooksInShelf, findShelf } from "../helpers";
 
 export const bookRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
@@ -12,6 +12,17 @@ export const bookRouter = createTRPCRouter({
         userId: ctx.auth.userId,
       },
     });
+  }),
+  get: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    const book = await findBook(ctx, input);
+
+    // Authorize
+    await isAuthorized({
+      ctx,
+      resourceUserId: book.userId,
+    });
+
+    return book;
   }),
   getBooksInShelf: protectedProcedure
     .input(z.string())
@@ -25,7 +36,7 @@ export const bookRouter = createTRPCRouter({
         resourceUserId: shelf.userId,
       });
 
-      const books = findBooks(ctx, shelf.id);
+      const books = findBooksInShelf(ctx, shelf.id);
 
       return books;
     }),
@@ -112,6 +123,28 @@ export const bookRouter = createTRPCRouter({
         },
         data: {
           shelfId: input.shelfId,
+        },
+      });
+    }),
+  update: protectedProcedure
+    .input(updateBookInput)
+    .mutation(async ({ ctx, input }) => {
+      // Find the book
+      const book = await findBook(ctx, input.id);
+
+      // If found but not belong to the user
+      await isAuthorized({
+        ctx,
+        resourceUserId: book.userId,
+      });
+
+      // Update the book
+      return ctx.prisma.book.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          ...input,
         },
       });
     }),
