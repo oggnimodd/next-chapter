@@ -12,19 +12,21 @@ datasource db {
 }
 
 model Book {
-  id             String  @id @unique @default(uuid())
+  id             String   @id @unique @default(uuid())
   title          String
   description    String?
   author         String?
   cover          String?
   progress       Int?
-  shelf          Shelf   @relation(fields: [shelfId], references: [id])
+  shelf          Shelf    @relation(fields: [shelfId], references: [id])
   userId         String
   notes          Note[]
-  review         Review? @relation(fields: [reviewId], references: [id])
+  review         Review?  @relation(fields: [reviewId], references: [id])
   shelfId        String
   reviewId       String?
   googleBooksUrl String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Shelf {
@@ -33,20 +35,26 @@ model Shelf {
   type      String
   isDefault Boolean?
   Book      Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Note {
-  id          String  @id @unique @default(cuid())
+  id          String   @id @unique @default(cuid())
   description String
   userId      String
-  Book        Book?   @relation(fields: [bookId], references: [id])
+  Book        Book?    @relation(fields: [bookId], references: [id])
   bookId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Review {
-  id          String @id @unique @default(cuid())
+  id          String   @id @unique @default(cuid())
   rating      Int?
   description String
   userId      String
   Book        Book[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
