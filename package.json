@@ -30,6 +30,7 @@
     "apps/next-chapter-react",
     "packages/db",
     "packages/api",
-    "packages/express-serverless"
+    "packages/express-serverless",
+    "packages/google-books"
   ]
 }
