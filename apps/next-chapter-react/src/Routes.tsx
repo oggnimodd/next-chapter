@@ -1,4 +1,4 @@
-import { Home, About, NotFound } from "pages";
+import { Home, NotFound, Search } from "pages";
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   SignedIn,
@@ -18,6 +18,11 @@ const routes = [
   {
     path: "/",
     component: <Home />,
+    type: "protected",
+  },
+  {
+    path: "/search",
+    component: <Search />,
     type: "public",
   },
   {
