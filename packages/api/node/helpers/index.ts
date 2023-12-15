@@ -1,7 +1,11 @@
+import { Book, Note, Review, Shelf } from "@acme/db";
 import { AuthenticatedContext } from "@/node/trpc";
 import { TRPCError } from "@trpc/server";
 
-export const findShelf = async (ctx: AuthenticatedContext, id: string) => {
+export const findShelf = async (
+  ctx: AuthenticatedContext,
+  id: string,
+): Promise<Shelf> => {
   const shelf = await ctx.prisma.shelf.findUnique({
     where: {
       id,
@@ -18,7 +22,9 @@ export const findShelf = async (ctx: AuthenticatedContext, id: string) => {
   return shelf;
 };
 
-export const findShelves = async (ctx: AuthenticatedContext) => {
+export const findShelves = async (
+  ctx: AuthenticatedContext,
+): Promise<Shelf[]> => {
   const shelves = await ctx.prisma.shelf.findMany({
     where: {
       // We only use it for authenticated users so the userId is guaranteed to be present
@@ -35,7 +41,10 @@ export const findShelves = async (ctx: AuthenticatedContext) => {
   return shelves;
 };
 
-export const findBook = async (ctx: AuthenticatedContext, id: string) => {
+export const findBook = async (
+  ctx: AuthenticatedContext,
+  id: string,
+): Promise<Book> => {
   const book = await ctx.prisma.book.findUnique({
     where: {
       id,
@@ -55,7 +64,7 @@ export const findBook = async (ctx: AuthenticatedContext, id: string) => {
 export const findBooksInShelf = async (
   ctx: AuthenticatedContext,
   shelfId: string,
-) => {
+): Promise<Book[]> => {
   const books = await ctx.prisma.book.findMany({
     where: {
       shelfId,
@@ -72,7 +81,10 @@ export const findBooksInShelf = async (
   return books;
 };
 
-export const findReview = async (ctx: AuthenticatedContext, id: string) => {
+export const findReview = async (
+  ctx: AuthenticatedContext,
+  id: string,
+): Promise<Review> => {
   const review = await ctx.prisma.review.findUnique({
     where: {
       id,
@@ -89,7 +101,10 @@ export const findReview = async (ctx: AuthenticatedContext, id: string) => {
   return review;
 };
 
-export const findNote = async (ctx: AuthenticatedContext, id: string) => {
+export const findNote = async (
+  ctx: AuthenticatedContext,
+  id: string,
+): Promise<Note> => {
   const note = await ctx.prisma.note.findUnique({
     where: {
       id,
