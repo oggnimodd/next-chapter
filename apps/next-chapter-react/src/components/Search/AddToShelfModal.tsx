@@ -11,6 +11,7 @@ import {
 import { Item } from "@acme/google-books";
 import { api } from "trpc";
 import toast from "react-hot-toast";
+import { useAuth, SignInButton } from "@clerk/clerk-react";
 
 interface AddToShelfModalProps {
   opened: boolean;
@@ -26,6 +27,7 @@ const AddToShelfModal: FC<AddToShelfModalProps> = ({
   handlers,
   item,
 }) => {
+  const { isSignedIn, isLoaded } = useAuth();
   const [shelf, setShelf] = useState<string>("");
   const {
     mutateAsync,
@@ -111,15 +113,30 @@ const AddToShelfModal: FC<AddToShelfModalProps> = ({
           >
             Close
           </Button>
-          <Button
-            disabled={isLoading || isMutating || !shelf}
-            color="primary"
-            className="mt-4 ml-auto"
-            variant="contained"
-            onClick={save}
-          >
-            Save
-          </Button>
+
+          {isLoaded && !isSignedIn && (
+            <SignInButton>
+              <Button
+                color="primary"
+                className="mt-4 ml-auto"
+                variant="contained"
+              >
+                Sign In To Save
+              </Button>
+            </SignInButton>
+          )}
+
+          {isLoaded && isSignedIn && (
+            <Button
+              disabled={isLoading || isMutating || !shelf}
+              color="primary"
+              className="mt-4 ml-auto"
+              variant="contained"
+              onClick={save}
+            >
+              Save
+            </Button>
+          )}
         </div>
       </form>
     </Modal>
