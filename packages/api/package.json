@@ -9,8 +9,8 @@
   "type": "module",
   "scripts": {
     "with-env": "dotenv -e ../../.env --",
-    "dev": "LADLE=true bun with-env bun --hot playground.ts",
-    "dev:express": "LADLE=true bun with-env bun --hot playground-express.ts",
+    "dev": "NODE_ENV=development bun with-env bun --hot playground.ts",
+    "dev:express": "NODE_ENV=development bun with-env bun --hot playground-express.ts",
     "clean": "rm -rf .turbo node_modules",
     "type-check": "tsc --noEmit"
   },
