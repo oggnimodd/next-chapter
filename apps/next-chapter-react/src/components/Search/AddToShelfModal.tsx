@@ -78,14 +78,14 @@ const AddToShelfModal: FC<AddToShelfModalProps> = ({
         {!isLoading && !isError && (
           <FormControl className="mt-2">
             <InputLabel size="small" id="select-shelf-label">
-              Choose Label
+              Choose Shelf
             </InputLabel>
             <Select
               value={shelf}
               onChange={(e) => setShelf(e.target.value)}
               labelId="select-shelf-label"
               size="small"
-              label="Choose Label"
+              label="Choose Shelf"
             >
               {shelves?.map((shelf) => (
                 <MenuItem key={shelf.id} value={shelf.id}>
