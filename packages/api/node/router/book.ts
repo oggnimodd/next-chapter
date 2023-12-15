@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { createBookInput, updateBookInput } from "models";
+import { updateBookInput } from "models";
 import { TRPCError } from "@trpc/server";
 import { isAuthorized } from "../middlewares";
 import { findBook, findBooksInShelf, findShelf } from "../helpers";
@@ -41,7 +41,16 @@ export const bookRouter = createTRPCRouter({
       return books;
     }),
   create: protectedProcedure
-    .input(createBookInput)
+    .input(
+      z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        author: z.string().optional(),
+        cover: z.string().url().optional(),
+        shelfId: z.string(),
+        googleBooksUrl: z.string().optional(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       // Find the shelf
       const shelf = await findShelf(ctx, input.shelfId);

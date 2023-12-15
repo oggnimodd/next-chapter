@@ -23,7 +23,7 @@ model Book {
   notes          Note[]
   review         Review?
   progress       Int?
-  googleBooksUrl String?
+  googleBooksUrl String?  @unique
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

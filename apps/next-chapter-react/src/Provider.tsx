@@ -13,6 +13,8 @@ import superjson from "superjson";
 import { api } from "trpc";
 import { useState } from "react";
 import { getCookie } from "utils";
+import { ShelvesProvider } from "providers";
+import { Toaster } from "react-hot-toast";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -92,7 +94,12 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
         <StyledEngineProvider injectFirst>
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
-              <ThemeProvider theme={materialTheme}>{children}</ThemeProvider>
+              <ThemeProvider theme={materialTheme}>
+                <ShelvesProvider>
+                  <Toaster position="bottom-right" />
+                  {children}
+                </ShelvesProvider>
+              </ThemeProvider>
             </BrowserRouter>
           </QueryClientProvider>
         </StyledEngineProvider>
