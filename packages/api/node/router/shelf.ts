@@ -4,6 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { findShelf, findShelves } from "../helpers";
 import { isAuthorized } from "../middlewares";
 import { z } from "zod";
+import { Book, Shelf } from "@acme/db";
 
 export const shelfRouter = createTRPCRouter({
   generateInitialShelves: protectedProcedure.mutation(async ({ ctx }) => {
@@ -35,7 +36,7 @@ export const shelfRouter = createTRPCRouter({
   }),
   // Get all shelves from the current user
   getAll: protectedProcedure.query(({ ctx }) => {
-    return findShelves(ctx);
+    return findShelves(ctx) as Promise<(Shelf & { Book: Book[] })[]>;
   }),
   get: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
     const shelf = await findShelf(ctx, input);
