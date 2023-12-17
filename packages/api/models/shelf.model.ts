@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const shelfTypeSchema = z.enum([
-  "READ",
-  "TO_BE_READ",
-  "CURRENTLY_READING",
+  "Read",
+  "To Be Read",
+  "Currently Reading",
 ]);
 
 export const shelfSchema = z.object({
@@ -21,17 +21,17 @@ export type InitialShelves = z.infer<typeof initialShelvesSchema>;
 export const INITIAL_SHELVES: InitialShelves = [
   {
     name: "To Be Read",
-    type: "TO_BE_READ",
+    type: "To Be Read",
     id: "1",
   },
   {
     name: "Currently Reading",
-    type: "CURRENTLY_READING",
+    type: "Currently Reading",
     id: "2",
   },
   {
     name: "Read",
-    type: "READ",
+    type: "Read",
     id: "3",
   },
 ];
