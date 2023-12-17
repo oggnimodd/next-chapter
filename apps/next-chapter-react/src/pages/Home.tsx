@@ -17,10 +17,9 @@ const ShelfPreview: FC<ShelfPrview> = ({ title, books }) => {
         {books.map((book) => (
           <div key={book.id} className="px-2 min-w-[200px] max-w-[200px]">
             <img
-              className="mb-3 object-cover"
+              className="mb-3 object-cover w-full h-[285px]"
               src={book.cover || "./no_cover.png"}
               alt={book.title}
-              width="100%"
             />
             <Typography className="max-w-full line-clamp-2">
               {book.title}
