@@ -5,6 +5,6 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: npm install
-
+  - init: curl -fsSL https://bun.sh/install | bash && source ~/.bashrc && bun install && npm install -g @antfu/ni xhinobi && sudo apt install fd-find fzf && echo "alias fac='fdfind --type f --exclude node_modules,dist | fzf -m | xhinobi'" >> ~/.bashrc && source ~/.bashrc
+    command: bun run dev
 
