@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
   app.get("/panel", ({ set }) => {
     set.headers["Content-Type"] = "text/html";
     const panelHtml = renderTrpcPanel(appRouter, {
-      url: `http://localhost:${PORT}/trpc`,
+      url: process.env.VITE_APP_TRPC_URL || `http://localhost:${PORT}/trpc`,
       transformer: "superjson",
     });
 
