@@ -13,15 +13,18 @@ const ShelfPreview: FC<ShelfPrview> = ({ title, books }) => {
   return (
     <div className="flex flex-col gap-y-2">
       <Typography className="text-2xl font-bold">{title}</Typography>
-      <div className="flex overflow-x-auto">
+      <div className="flex overflow-x-auto gap-x-3 snap-x snap-mandatory">
         {books.map((book) => (
-          <div key={book.id} className="px-2 min-w-[200px] max-w-[200px]">
+          <div
+            key={book.id}
+            className="min-w-[200px] max-w-[200px] snap-center"
+          >
             <img
               className="mb-3 object-cover w-full h-[285px]"
               src={book.cover || "./no_cover.png"}
               alt={book.title}
             />
-            <Typography className="max-w-full line-clamp-2">
+            <Typography className="max-w-full line-clamp-2 font-semibold">
               {book.title}
             </Typography>
           </div>
