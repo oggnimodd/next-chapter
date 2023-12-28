@@ -98,6 +98,7 @@ const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
 
         handlers.close();
         utils.shelf.getAll.invalidate();
+        utils.book.getBooksInShelf.invalidate();
       }
     } catch (error) {
       toast.error("Something went wrong");

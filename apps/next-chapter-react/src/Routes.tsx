@@ -1,4 +1,4 @@
-import { Home, NotFound, Search } from "pages";
+import { Home, NotFound, Search, Shelf } from "pages";
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   SignedIn,
@@ -24,6 +24,11 @@ const routes = [
     path: "/search",
     component: <Search />,
     type: "public",
+  },
+  {
+    path: "/shelf/:id",
+    component: <Shelf />,
+    type: "protected",
   },
   {
     path: "/sign-in/*",

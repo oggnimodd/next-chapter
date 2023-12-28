@@ -27,6 +27,7 @@ const ModalRemoveBook: FC<ModalRemoveBookProps> = ({
     try {
       await removeBook(bookId);
       await utils.shelf.getAll.invalidate();
+      await utils.book.getBooksInShelf.invalidate();
       toast.success("Book removed successfully");
     } catch (err) {
       toast.error("Failed to remove book");

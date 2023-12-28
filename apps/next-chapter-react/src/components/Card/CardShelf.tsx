@@ -18,6 +18,7 @@ import clsx from "clsx";
 import { ModalRemoveBook, ModalAddToShelf } from "components/Modal";
 import { useDisclosure } from "@mantine/hooks";
 import isMobile from "is-mobile";
+import { useLocation } from "react-router-dom";
 
 interface CardShelfProps {
   book: Book;
@@ -27,6 +28,8 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [removeModalOpened, removeModalhandlers] = useDisclosure(false);
   const [moveModalOpened, moveModalhandlers] = useDisclosure(false);
+  const { pathname } = useLocation();
+  const isHomePage = pathname === "/";
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
@@ -39,10 +42,16 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
   return (
     <div
       key={book.id}
-      className="group min-w-[200px] max-w-[200px] snap-center flex flex-col"
+      className={clsx("group snap-center flex flex-col", {
+        "min-w-[200px] max-w-[200px]": isHomePage,
+        "w-full": !isHomePage,
+      })}
     >
       <img
-        className="mb-3 object-cover w-full h-[285px]"
+        className={clsx("mb-3 object-cover w-full", {
+          "h-[285px]": isHomePage,
+          "aspect-[1/1.4]": !isHomePage,
+        })}
         src={book.cover || "./no_cover.png"}
         alt={book.title}
       />
