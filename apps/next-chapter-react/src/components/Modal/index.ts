@@ -1,1 +1,1 @@
-export { default as AddToShelfModal } from "./AddToShelfModal";
+export { default as ModalAddToShelf } from "./ModalAddToShelf";

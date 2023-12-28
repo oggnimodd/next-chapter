@@ -13,7 +13,7 @@ import { api } from "trpc";
 import toast from "react-hot-toast";
 import { useAuth, SignInButton } from "@clerk/clerk-react";
 
-interface AddToShelfModalProps {
+interface ModalAddToShelfProps {
   opened: boolean;
   handlers: {
     open: () => void;
@@ -22,7 +22,7 @@ interface AddToShelfModalProps {
   item: Item;
 }
 
-const AddToShelfModal: FC<AddToShelfModalProps> = ({
+const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
   opened,
   handlers,
   item,
@@ -143,4 +143,4 @@ const AddToShelfModal: FC<AddToShelfModalProps> = ({
   );
 };
 
-export default AddToShelfModal;
+export default ModalAddToShelf;

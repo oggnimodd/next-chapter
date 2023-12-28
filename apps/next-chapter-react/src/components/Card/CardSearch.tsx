@@ -9,13 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import AddToShelfModal from "../Modal/AddToShelfModal";
+import { ModalAddToShelf } from "components";
 
-interface CardProps {
+interface CardSearchProps {
   item: Item;
 }
 
-const CardComponent: FC<CardProps> = ({ item }) => {
+const CardSearch: FC<CardSearchProps> = ({ item }) => {
   const [opened, handlers] = useDisclosure(false);
 
   return (
@@ -52,9 +52,9 @@ const CardComponent: FC<CardProps> = ({ item }) => {
           </Button>
         </CardActions>
       </Card>
-      <AddToShelfModal opened={opened} handlers={handlers} item={item} />
+      <ModalAddToShelf opened={opened} handlers={handlers} item={item} />
     </>
   );
 };
 
-export default CardComponent;
+export default CardSearch;
