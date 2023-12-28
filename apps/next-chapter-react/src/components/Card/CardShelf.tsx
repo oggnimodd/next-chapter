@@ -5,7 +5,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import clsx from "clsx";
-import { ModalRemoveBook } from "components/Modal";
+import { ModalRemoveBook, ModalAddToShelf } from "components/Modal";
 import { useDisclosure } from "@mantine/hooks";
 
 interface CardShelfProps {
@@ -15,6 +15,7 @@ interface CardShelfProps {
 const CardShelf: FC<CardShelfProps> = ({ book }) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [removeModalOpened, removeModalhandlers] = useDisclosure(false);
+  const [moveModalOpened, moveModalhandlers] = useDisclosure(false);
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
@@ -72,7 +73,12 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            moveModalhandlers.open();
+          }}
+        >
           <MultipleStopIcon color="primary" fontSize="small" className="mr-2" />
           Move to shelf
         </MenuItem>
@@ -91,6 +97,13 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
       <ModalRemoveBook
         opened={removeModalOpened}
         handlers={removeModalhandlers}
+        bookId={book.id}
+        title={book.title}
+      />
+      <ModalAddToShelf
+        opened={moveModalOpened}
+        handlers={moveModalhandlers}
+        action="MOVE"
         bookId={book.id}
         title={book.title}
       />

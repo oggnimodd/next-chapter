@@ -13,48 +13,94 @@ import { api } from "trpc";
 import toast from "react-hot-toast";
 import { useAuth, SignInButton } from "@clerk/clerk-react";
 
-interface ModalAddToShelfProps {
+type ActionTypes = "ADD" | "MOVE";
+
+interface BaseProps {
   opened: boolean;
   handlers: {
     open: () => void;
     close: () => void;
   };
-  item: Item;
+  action: ActionTypes;
+  item?: Item;
 }
+
+interface AddActionProps extends BaseProps {
+  action: "ADD";
+  bookId?: string;
+  title?: string;
+}
+
+interface MoveActionProps extends BaseProps {
+  action: "MOVE";
+  bookId: string;
+  title: string;
+}
+
+type ModalAddToShelfProps = AddActionProps | MoveActionProps;
 
 const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
   opened,
   handlers,
-  item,
+  action = "ADD",
+  bookId,
+  item = {
+    volumeInfo: {
+      title: "",
+      imageLinks: {
+        thumbnail: "",
+      },
+    },
+  } as Item,
+  title,
 }) => {
+  const utils = api.useUtils();
   const { isSignedIn, isLoaded } = useAuth();
   const [shelf, setShelf] = useState<string>("");
   const {
-    mutateAsync,
-    error: mutationError,
-    isLoading: isMutating,
+    mutateAsync: addNewBook,
+    error: addNewBookError,
+    isLoading: addNewBookisMutating,
   } = api.book.create.useMutation();
+
+  const { mutateAsync: moveBook, isLoading: moveBookisMutating } =
+    api.book.moveToShelf.useMutation();
+
   const { data: shelves, isLoading, isError } = api.shelf.getAll.useQuery();
 
   let bookCreationError = "";
 
-  if (mutationError) {
-    if (mutationError?.message.includes("constraint")) {
+  if (addNewBookError) {
+    if (addNewBookError?.message.includes("constraint")) {
       bookCreationError = "This book is already exist in your shelves";
     }
   }
 
   const save = async () => {
-    if (shelf) {
-      await mutateAsync({
-        shelfId: shelf,
-        title: item.volumeInfo.title,
-        cover: item.volumeInfo.imageLinks?.thumbnail || "",
-        description: item.volumeInfo.description || "",
-        googleBooksUrl: item.volumeInfo.infoLink || "",
-      });
-      handlers.close();
-      toast.success("Book created successfully");
+    try {
+      if (shelf) {
+        if (action === "ADD") {
+          await addNewBook({
+            shelfId: shelf,
+            title: item.volumeInfo?.title,
+            cover: item.volumeInfo?.imageLinks?.thumbnail || "",
+            description: item.volumeInfo?.description || "",
+            googleBooksUrl: item.volumeInfo?.infoLink || "",
+          });
+          toast.success("Book created successfully");
+        } else if (action === "MOVE") {
+          await moveBook({
+            bookId: bookId || "",
+            shelfId: shelf,
+          });
+          toast.success("Book moved successfully");
+        }
+
+        handlers.close();
+        utils.shelf.getAll.invalidate();
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
     }
   };
 
@@ -72,10 +118,10 @@ const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
           variant="h6"
           component="h2"
         >
-          {item.volumeInfo.title}
+          {item.volumeInfo?.title || title}
         </Typography>
         <Typography className="line-clamp-4 mt-2" id="modal-description">
-          {item.volumeInfo.description}
+          {item.volumeInfo?.description}
         </Typography>
         {!isLoading && !isError && (
           <FormControl className="mt-2">
@@ -128,13 +174,18 @@ const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
 
           {isLoaded && isSignedIn && (
             <Button
-              disabled={isLoading || isMutating || !shelf}
+              disabled={
+                isLoading ||
+                addNewBookisMutating ||
+                moveBookisMutating ||
+                !shelf
+              }
               color="primary"
               className="mt-4 ml-auto"
               variant="contained"
               onClick={save}
             >
-              Save
+              {action === "ADD" ? "Save" : "Move"}
             </Button>
           )}
         </div>
