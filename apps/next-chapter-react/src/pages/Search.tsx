@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { searchBooks } from "@acme/google-books";
 import { useDebouncedValue } from "@mantine/hooks";
 import { Clear } from "@mui/icons-material";
-import { Books } from "components";
+import { BookListSearch } from "components";
 
 const Search: FC = () => {
   const [query, setQuery] = useState("");
@@ -51,7 +51,9 @@ const Search: FC = () => {
         </div>
       </Box>
 
-      {!isFetching && !isError && books?.items && <Books books={books.items} />}
+      {!isFetching && !isError && books?.items && (
+        <BookListSearch books={books.items} />
+      )}
     </BaseLayout>
   );
 };

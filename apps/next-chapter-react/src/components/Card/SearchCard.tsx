@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import AddToShelfModal from "./AddToShelfModal";
+import AddToShelfModal from "../Modal/AddToShelfModal";
 
 interface CardProps {
   item: Item;
