@@ -65,7 +65,7 @@ const ModalAddToShelf: FC<ModalAddToShelfProps> = ({
       aria-labelledby="add-to-shelf-modal"
       aria-describedby="add-to-shelf-modal"
     >
-      <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-background-default border-2 border-black shadow-2xl p-10 rounded flex flex-col">
+      <form className="modal">
         <Typography
           className="text-primary-main"
           id="modal-title"
