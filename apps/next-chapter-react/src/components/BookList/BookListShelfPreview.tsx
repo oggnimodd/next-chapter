@@ -18,7 +18,9 @@ const BookListShelfPreview: FC<CardShelfProps> = ({
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex justify-between items-center">
-        <Typography className="text-2xl font-bold">{title}</Typography>
+        <Typography className="text-2xl font-bold" color="primary">
+          {title}
+        </Typography>
 
         <Link
           to={`/shelf/${shelfId}`}
