@@ -22,7 +22,9 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
       >
         <KeyboardArrowUp />
       </Fab>
-      <Container className="w-full py-4 px-6 max-w-full">{children}</Container>
+      <Container className="w-full py-4 px-6 container mx-auto">
+        {children}
+      </Container>
     </>
   );
 };

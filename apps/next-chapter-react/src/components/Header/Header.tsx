@@ -36,7 +36,7 @@ const Header: FC = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className="container mx-auto">
         <Typography
           component={Link}
           to="/"
