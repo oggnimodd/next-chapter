@@ -1,48 +1,71 @@
-import { FC, useState } from "react";
+import React, { FC, useState, useRef } from "react";
 import { BaseLayout } from "layouts";
 import { Box, TextField, CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { searchBooks } from "@acme/google-books";
-import { useDebouncedValue } from "@mantine/hooks";
-import { Clear } from "@mui/icons-material";
+import { Clear, Search as SearchIcon } from "@mui/icons-material";
 import { BookListSearch } from "components";
 
 const Search: FC = () => {
   const [query, setQuery] = useState("");
-  const [debouncedQuery] = useDebouncedValue(query, 500);
+  const queryRef = useRef<HTMLInputElement | null>(null);
 
   const {
     data: books,
     isFetching,
     isError,
   } = useQuery(
-    ["books", debouncedQuery],
+    ["books", query],
     () =>
       searchBooks({
-        query: debouncedQuery,
+        query: query,
       }),
     {
-      enabled: Boolean(debouncedQuery),
+      enabled: Boolean(query),
       refetchOnWindowFocus: false,
       keepPreviousData: true,
     },
   );
 
+  const handleSearch = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent,
+  ) => {
+    e.preventDefault();
+    setQuery(queryRef?.current?.value || "");
+  };
+
+  const clear = () => {
+    setQuery("");
+    if (queryRef.current) {
+      queryRef.current.value = "";
+    }
+  };
+
   return (
     <BaseLayout>
-      <Box className="flex gap-x-2 max-w-lg w-full">
+      <Box
+        onSubmit={handleSearch}
+        component="form"
+        className="flex gap-x-2 max-w-lg w-full"
+      >
         <TextField
+          autoFocus
           fullWidth
           size="small"
           label="Search Books"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          inputRef={queryRef}
           InputProps={{
-            endAdornment: query && (
-              <Clear
-                className="cursor-pointer text-primary-main text-lg"
-                onClick={() => setQuery("")}
-              />
+            endAdornment: (
+              <div className="flex items-center gap-x-2">
+                <Clear
+                  className="cursor-pointer text-primary-main text-lg"
+                  onClick={clear}
+                />
+                <SearchIcon
+                  className="cursor-pointer text-primary-main text-lg"
+                  onClick={handleSearch}
+                />
+              </div>
             ),
           }}
         />
