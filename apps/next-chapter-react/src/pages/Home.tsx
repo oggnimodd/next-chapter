@@ -17,6 +17,7 @@ const Home: FC = () => {
             key={shelf.id}
             title={shelf.type}
             books={shelf.Book}
+            shelfId={shelf.id}
           />
         ))}
       </div>
