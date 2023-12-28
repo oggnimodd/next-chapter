@@ -8,7 +8,7 @@ interface BooksProps {
 
 const Books: FC<BooksProps> = ({ books }) => {
   return (
-    <div className="grid gap-3 sm:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-5">
+    <div className="grid gap-3 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-5">
       {books.map((book) => (
         <Card key={book.id} item={book} />
       ))}

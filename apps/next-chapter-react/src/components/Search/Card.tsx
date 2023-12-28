@@ -22,7 +22,7 @@ const CardComponent: FC<CardProps> = ({ item }) => {
     <>
       <Card variant="outlined" className="w-full flex flex-col">
         <CardMedia
-          className="w-full h-64 object-cover"
+          className="w-full object-cover aspect-[1/1.25]"
           component="img"
           image={
             item.volumeInfo.imageLinks?.large ||
