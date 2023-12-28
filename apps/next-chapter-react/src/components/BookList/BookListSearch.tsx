@@ -1,6 +1,6 @@
 import { Item } from "@acme/google-books";
 import { FC } from "react";
-import { CardSearch } from "components";
+import { CardSearch } from "components/Card";
 
 interface BookListSearchProps {
   books: Item[];

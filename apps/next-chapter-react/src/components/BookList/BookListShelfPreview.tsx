@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { FC } from "react";
 import { Book } from "@acme/db";
-import { CardShelf, CardEmptyShelf } from "components";
+import { CardShelf, CardEmptyShelf } from "components/Card";
 
 interface CardShelfProps {
   title: string;

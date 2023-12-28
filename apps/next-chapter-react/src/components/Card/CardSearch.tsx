@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import { ModalAddToShelf } from "components";
+import { ModalAddToShelf } from "components/Modal";
 
 interface CardSearchProps {
   item: Item;

@@ -5,7 +5,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import clsx from "clsx";
-import { ModalRemoveBook } from "components";
+import { ModalRemoveBook } from "components/Modal";
 import { useDisclosure } from "@mantine/hooks";
 
 interface CardShelfProps {
