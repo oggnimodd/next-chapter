@@ -62,8 +62,8 @@ const AddToShelfModal: FC<AddToShelfModalProps> = ({
     <Modal
       open={opened}
       onClose={() => handlers.close()}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
+      aria-labelledby="add-to-shelf-modal"
+      aria-describedby="add-to-shelf-modal"
     >
       <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-background-default border-2 border-black shadow-2xl p-10 rounded flex flex-col">
         <Typography
