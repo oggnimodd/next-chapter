@@ -52,7 +52,12 @@ const CardSearch: FC<CardSearchProps> = ({ item }) => {
           </Button>
         </CardActions>
       </Card>
-      <ModalAddToShelf opened={opened} handlers={handlers} item={item} />
+      <ModalAddToShelf
+        action="ADD"
+        opened={opened}
+        handlers={handlers}
+        item={item}
+      />
     </>
   );
 };
