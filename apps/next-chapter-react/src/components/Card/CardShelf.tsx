@@ -18,7 +18,7 @@ import clsx from "clsx";
 import { ModalRemoveBook, ModalAddToShelf } from "components/Modal";
 import { useDisclosure } from "@mantine/hooks";
 import isMobile from "is-mobile";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 interface CardShelfProps {
   book: Book;
@@ -47,16 +47,22 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
         "w-full": !isHomePage,
       })}
     >
-      <img
-        className={clsx("mb-3 object-cover w-full", {
-          "h-[285px]": isHomePage,
-          "aspect-[1/1.4]": !isHomePage,
-        })}
-        src={book.cover || "./no_cover.png"}
-        alt={book.title}
-      />
+      <Link to={`/book/${book.id}`} className="w-full">
+        <img
+          className={clsx("mb-3 object-cover w-full", {
+            "h-[285px]": isHomePage,
+            "aspect-[1/1.4]": !isHomePage,
+          })}
+          src={book.cover || "./no_cover.png"}
+          alt={book.title}
+        />
+      </Link>
       <div className="flex justify-between items-center">
-        <Typography className="w-2/3 line-clamp-2 font-semibold flex-0 group-hover:text-primary-main">
+        <Typography
+          component={Link}
+          to={`/book/${book.id}`}
+          className="w-2/3 line-clamp-2 font-semibold flex-0 group-hover:text-primary-main"
+        >
           {book.title}
         </Typography>
         <div
