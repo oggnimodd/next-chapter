@@ -56,7 +56,7 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
         alt={book.title}
       />
       <div className="flex justify-between items-center">
-        <Typography className="w-2/3 line-clamp-2 font-semibold flex-0">
+        <Typography className="w-2/3 line-clamp-2 font-semibold flex-0 group-hover:text-primary-main">
           {book.title}
         </Typography>
         <div
