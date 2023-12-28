@@ -3,6 +3,7 @@ import { BaseLayout } from "layouts";
 import { api } from "trpc";
 import { Book } from "@acme/db";
 import { Typography } from "@mui/material";
+import { CardEmptyShelf } from "components";
 
 interface ShelfPrview {
   title: string;
@@ -14,6 +15,7 @@ const ShelfPreview: FC<ShelfPrview> = ({ title, books }) => {
     <div className="flex flex-col gap-y-2">
       <Typography className="text-2xl font-bold">{title}</Typography>
       <div className="flex overflow-x-auto gap-x-3 snap-x snap-mandatory">
+        {books.length === 0 && <CardEmptyShelf />}
         {books.map((book) => (
           <div
             key={book.id}
