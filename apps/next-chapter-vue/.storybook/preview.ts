@@ -8,6 +8,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import { aliases, mdi } from "vuetify/iconsets/mdi";
 
 import { setup } from "@storybook/vue3";
 
@@ -15,6 +16,13 @@ setup((app) => {
   const vuetify = createVuetify({
     components,
     directives,
+    icons: {
+      defaultSet: "mdi",
+      aliases,
+      sets: {
+        mdi,
+      },
+    },
   });
 
   app.use(vuetify);
@@ -22,8 +30,6 @@ setup((app) => {
   app.use(clerkPlugin, {
     publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
   });
-
-  app.use(router);
 
   app.use(VueQueryPlugin);
 });

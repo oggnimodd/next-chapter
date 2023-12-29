@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a{
+  @apply no-underline;
+
+  /* Reset color to inherit */
+  color: inherit;
+}

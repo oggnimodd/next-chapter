@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import { CommonLayout } from "@/layouts";
-import { useTheme } from "vuetify";
+import { BaseLayout } from "@/layouts";
 
-const theme = useTheme();
-
-const toggleTheme = () => {
-  theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
-};
 </script>
 
 <template>
-  <CommonLayout :require-auth="false">
-    <div>
-      <p class="text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolor.
-      </p>
-      <v-btn size="small" @click="toggleTheme" color="primary"> Button </v-btn>
-    </div>
-  </CommonLayout>
-</template>
+  <BaseLayout :require-auth="true">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus beatae ex at vitae maxime esse ad, alias
+      earum atque quod libero ipsam nesciunt odit delectus enim recusandae officia fugit distinctio quas dicta debitis
+      quidem id officiis? Fugiat in non ducimus ipsam dolor totam. Eligendi nisi nulla fugiat expedita eius officiis
+      itaque, ex nesciunt sunt fugit temporibus, porro magni iste modi? Doloremque molestiae aspernatur harum, ipsum
+      voluptates quod? Architecto impedit quaerat iure maiores molestiae consequuntur, aliquam rerum temporibus sequi
+    dicta, accusantium voluptatibus cupiditate quisquam quam. Reiciendis laboriosam veritatis alias aliquid omnis, cum
+    at consectetur praesentium illo quidem, suscipit repudiandae eos?</p>
+</BaseLayout></template>

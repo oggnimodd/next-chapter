@@ -1,5 +1,7 @@
+import colors from "vuetify/util/colors";
+
 export const appearance = {
   variables: {
-    colorPrimary: "#10b981",
+    colorPrimary: colors.blue.darken1,
   },
 };
