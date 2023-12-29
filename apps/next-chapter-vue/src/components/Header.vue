@@ -57,14 +57,14 @@ const toggleTheme = () => {
             </router-link>
 
 
-            <VListItem>
-              <router-link to="/profile">
+            <router-link to="/profile">
+              <VListItem>
                 <VListItemTitle>
                   <VIcon icon="mdi-account" class="mr-3" />
                   Profile
                 </VListItemTitle>
-              </router-link>
-            </VListItem>
+              </VListItem>
+            </router-link>
 
             <router-link to="/search">
               <VListItem>
