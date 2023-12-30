@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-a{
+a {
   @apply no-underline;
 
   /* Reset color to inherit */
   color: inherit;
+}
+
+.v-dialog .v-overlay__content .v-card {
+  @apply p-6 sm:p-10 rounded;
 }

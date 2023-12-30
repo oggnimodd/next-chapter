@@ -1,27 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useUser, useAuth } from 'vue-clerk';
-import { VBtn, VList } from 'vuetify/components';
-import { useTheme } from 'vuetify'
+import { ref } from "vue";
+import { useUser, useAuth } from "vue-clerk";
+import { VBtn, VList } from "vuetify/components";
+import { useDarkMode } from "@/composables";
 
 // Auth
-const { signOut } = useAuth()
+const { signOut } = useAuth();
 const { isLoaded, isSignedIn, user } = useUser();
 
 // Menu
 const menu = ref(false);
 
 // Theme
-const theme = useTheme()
-const isDark = ref(theme.global.current.value.dark);
-
-const toggleTheme = () => {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-  isDark.value = theme.global.current.value.dark
-};
-
+const { isDark, toggleTheme } = useDarkMode();
 </script>
-
 
 <template>
   <VAppBar color="primary">
@@ -36,15 +28,22 @@ const toggleTheme = () => {
           <VBtn icon="mdi-magnify" />
         </router-link>
 
-        <VBtn @click="toggleTheme" :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" />
-
+        <VBtn
+          @click="toggleTheme"
+          :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+        />
 
         <VMenu v-if="isSignedIn && isLoaded" v-model="menu">
           <template v-slot:activator="{ props }">
-            <VAvatar @click="menu = !menu" v-bind="props" role="button" class="w-10 h-10"
-              aria-label="account of current user" :image="user?.imageUrl" />
+            <VAvatar
+              @click="menu = !menu"
+              v-bind="props"
+              role="button"
+              class="w-10 h-10"
+              aria-label="account of current user"
+              :image="user?.imageUrl"
+            />
           </template>
-
 
           <VList>
             <router-link to="/">
@@ -55,7 +54,6 @@ const toggleTheme = () => {
                 </VListItemTitle>
               </VListItem>
             </router-link>
-
 
             <router-link to="/profile">
               <VListItem>
@@ -75,20 +73,15 @@ const toggleTheme = () => {
               </VListItem>
             </router-link>
 
-
             <VListItem @click="signOut">
               <VListItemTitle class="text-red">
                 <VIcon color="red" icon="mdi-logout" class="mr-3" />
                 Sign Out
               </VListItemTitle>
             </VListItem>
-
           </VList>
         </VMenu>
-
       </div>
-
     </VToolbar>
-
   </VAppBar>
 </template>

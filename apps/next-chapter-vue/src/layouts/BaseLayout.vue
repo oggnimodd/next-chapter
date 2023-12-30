@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { Header } from "@/components"
+import { Header } from "@/components";
 import { onMounted } from "vue";
 import { watch } from "vue";
 import { useAuth, useClerk } from "vue-clerk";
 import { useRoute, useRouter } from "vue-router";
 import { appearance } from "@/clerk";
-import { useScrollToTop } from "@/composables"
+import { useScrollToTop } from "@/composables";
 
-
-const { scrollToTop } = useScrollToTop()
+const { scrollToTop } = useScrollToTop();
 
 interface Props {
   requireAuth?: boolean;
@@ -46,21 +45,26 @@ watch(isSignedIn, async (newValue, oldValue) => {
 onMounted(async () => {
   await checkAuth();
 });
-
-console.log(isSignedIn.value);
 </script>
 
 <template>
   <VApp>
     <Header />
 
-    <VBtn color="primary" class="fixed bottom-4 right-4 !min-w-0 w-12 h-12 rounded-full shadow-md">
-      <VIcon size="x-large" @click="scrollToTop" color="white" icon="mdi-chevron-up" />
+    <VBtn
+      color="primary"
+      class="fixed bottom-4 right-4 !min-w-0 w-12 h-12 rounded-full shadow-md z-50"
+      @click="scrollToTop"
+    >
+      <VIcon size="x-large" color="white" icon="mdi-chevron-up" />
     </VBtn>
 
     <VMain>
       <VContainer class="w-full py-4 px-6 container mx-auto">
-        <div v-if="requireAuth && !isLoaded" class="flex flex-col items-center justify-center items-center py-10">
+        <div
+          v-if="requireAuth && !isLoaded"
+          class="flex flex-col items-center justify-center items-center py-10"
+        >
           <p>Loading...</p>
         </div>
 
@@ -71,4 +75,4 @@ console.log(isSignedIn.value);
       </VContainer>
     </VMain>
   </VApp>
-</template>  
+</template>
