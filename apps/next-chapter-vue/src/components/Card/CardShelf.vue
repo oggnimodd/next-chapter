@@ -45,7 +45,7 @@ const { book } = defineProps<CardShelfProps>();
     <div class="flex justify-between items-center">
       <router-link
         :to="`/book/${book.id}`"
-        class="w-2/3 line-clamp-2 font-semibold flex-0 group-hover:text-primary-main"
+        class="w-2/3 line-clamp-2 font-semibold flex-0 text-primary"
       >
         {{ book.title }}
       </router-link>
