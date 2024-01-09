@@ -68,7 +68,7 @@ const BookDetails: FC = () => {
             </Typography>
 
             <Typography
-              className="text-white"
+              className="text-black dark:text-white"
               variant="body1"
               component={Link}
               to={`/shelf/${shelf?.id}`}
