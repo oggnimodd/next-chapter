@@ -33,6 +33,10 @@ const ModalRemoveBook: FC<ModalRemoveBookProps> = ({
       toast.error("Failed to remove book");
     } finally {
       handlers.close();
+
+      await utils.shelf.getAll.invalidate();
+      await utils.book.getBooksInShelf.invalidate();
+      await utils.book.get.invalidate();
     }
   };
 

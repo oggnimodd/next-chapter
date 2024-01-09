@@ -47,7 +47,7 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
         "w-full": !isHomePage,
       })}
     >
-      <Link to={`/book/${book.id}`} className="w-full">
+      <Link to={`/book/${book.id}/details`} className="w-full">
         <img
           className={clsx("mb-3 object-cover w-full", {
             "h-[285px]": isHomePage,

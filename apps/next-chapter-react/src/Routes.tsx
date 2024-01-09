@@ -1,4 +1,4 @@
-import { Home, NotFound, Search, Shelf } from "pages";
+import { Home, Book, NotFound, Search, Shelf } from "pages";
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   SignedIn,
@@ -24,6 +24,11 @@ const routes = [
     path: "/search",
     component: <Search />,
     type: "public",
+  },
+  {
+    path: "/book/:id/:sub",
+    component: <Book />,
+    type: "protected",
   },
   {
     path: "/shelf/:id",

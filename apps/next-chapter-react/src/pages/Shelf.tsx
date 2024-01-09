@@ -1,13 +1,12 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { BaseLayout } from "layouts";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BookListShelf, CardEmptyShelf } from "components";
 import { api } from "trpc";
-import toast from "react-hot-toast";
+import { useNavigateOnError } from "hooks";
 
 const Shelf: FC = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { data: shelfInfo } = api.shelf.get.useQuery(id || "");
   const {
     data: books,
@@ -16,12 +15,7 @@ const Shelf: FC = () => {
     error,
   } = api.book.getBooksInShelf.useQuery(id || "");
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(error.message);
-      navigate("/");
-    }
-  }, [isError]);
+  useNavigateOnError({ isError, message: error?.message });
 
   return (
     <BaseLayout>

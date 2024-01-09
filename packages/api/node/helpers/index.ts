@@ -44,7 +44,7 @@ export const findShelves = async (
 export const findBook = async (
   ctx: AuthenticatedContext,
   id: string,
-): Promise<Book> => {
+): Promise<Book & { shelf: Shelf }> => {
   const book = await ctx.prisma.book.findUnique({
     where: {
       id,
@@ -58,7 +58,23 @@ export const findBook = async (
     });
   }
 
-  return book;
+  const shelf = await ctx.prisma.shelf.findUnique({
+    where: {
+      id: book.shelfId,
+    },
+  });
+
+  if (!shelf) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Shelf not found",
+    });
+  }
+
+  return {
+    ...book,
+    shelf: shelf,
+  };
 };
 
 export const findBooksInShelf = async (
