@@ -39,38 +39,41 @@ const Book: FC = () => {
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error...</p>}
       {!isLoading && !isError && (
-        <div>
+        <div className="flex flex-col relative">
           <h1 className="text-2xl text-primary-main">
             {googleBooksDetails?.volumeInfo?.title || ""}
           </h1>
-          <Tabs value={currentTab} aria-label="Book Tabs" className="mb-4">
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.label}
-                label={tab.label}
-                value={tab.value}
-                to={tab.to}
-                component={Link}
-                {...tabA11y({
-                  index: tabs.indexOf(tab),
-                  name: "book",
-                })}
-              />
-            ))}
-          </Tabs>
-
-          {tabs.map((tab) => {
-            return (
-              <TabPanel
-                name="book"
-                key={tab.label}
-                index={tabs.indexOf(tab)}
-                hidden={tab.value !== currentTab}
-              >
-                <tab.component />
-              </TabPanel>
-            );
-          })}
+          <div className="sticky top-0 bg-background-default">
+            <Tabs value={currentTab} aria-label="Book Tabs">
+              {tabs.map((tab) => (
+                <Tab
+                  key={tab.label}
+                  label={tab.label}
+                  value={tab.value}
+                  to={tab.to}
+                  component={Link}
+                  {...tabA11y({
+                    index: tabs.indexOf(tab),
+                    name: "book",
+                  })}
+                />
+              ))}
+            </Tabs>
+          </div>
+          <div className="mt-4">
+            {tabs.map((tab) => {
+              return (
+                <TabPanel
+                  name="book"
+                  key={tab.label}
+                  index={tabs.indexOf(tab)}
+                  hidden={tab.value !== currentTab}
+                >
+                  <tab.component />
+                </TabPanel>
+              );
+            })}
+          </div>
         </div>
       )}
     </BaseLayout>
