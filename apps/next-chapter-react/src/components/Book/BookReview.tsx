@@ -6,6 +6,19 @@ import toast from "react-hot-toast";
 import { Card, IconButton, Typography, Rating } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
+const labels: { [index: string]: string } = {
+  0.5: "Abysmal",
+  1: "Terrible",
+  1.5: "Very Bad",
+  2: "Bad",
+  2.5: "Below Average",
+  3: "Average",
+  3.5: "Good",
+  4: "Very Good",
+  4.5: "Excellent",
+  5: "Outstanding",
+};
+
 interface BookReviewCardAndForm {
   bookId: string;
 }
@@ -71,18 +84,25 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
 
   if (isReviewLoading) return <p>Loading...</p>;
 
+  const renderLabel = () => {
+    return <Typography>{rating ? labels[rating] : "No rating"}</Typography>;
+  };
+
   if (!review || error?.data?.code === "NOT_FOUND") {
     return (
       <div className="flex flex-col gap-2">
-        <Rating
-          className="w-auto self-start"
-          precision={0.5}
-          size="large"
-          name="book-rating"
-          onChange={(_event, newValue) => {
-            setRating(newValue);
-          }}
-        />
+        <div className="flex gap-x-2 items-center">
+          <Rating
+            className="w-auto self-start"
+            precision={0.5}
+            size="large"
+            name="book-rating"
+            onChange={(_event, newValue) => {
+              setRating(newValue);
+            }}
+          />
+          {renderLabel()}
+        </div>
         <TextAreaForm type="CREATE" name="reviews" onSubmit={handleAddReview} />
       </div>
     );
@@ -91,17 +111,21 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
   if (isEditMode) {
     return (
       <div className="flex flex-col gap-2">
-        <Rating
-          className="w-auto self-start"
-          precision={0.5}
-          size="large"
-          name="book-rating"
-          defaultValue={review.rating || 0}
-          value={rating}
-          onChange={(_event, newValue) => {
-            setRating(newValue);
-          }}
-        />
+        <div className="flex gap-x-2 items-center">
+          <Rating
+            className="w-auto self-start"
+            precision={0.5}
+            size="large"
+            name="book-rating"
+            defaultValue={review.rating || 0}
+            value={rating}
+            onChange={(_event, newValue) => {
+              setRating(newValue);
+            }}
+          />
+          {renderLabel()}
+        </div>
+
         <TextAreaForm
           type="EDIT"
           name="reviews"
@@ -115,13 +139,17 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
 
   return (
     <Card className="mt-2 p-4 rounded-md flex flex-col gap-2">
-      <Rating
-        className="w-auto self-start"
-        name="book-rating"
-        value={review.rating}
-        readOnly
-        precision={0.5}
-      />
+      <div className="flex gap-x-2 items-center">
+        <Rating
+          className="w-auto self-start"
+          name="book-rating"
+          value={review.rating}
+          readOnly
+          precision={0.5}
+        />
+        {renderLabel()}
+      </div>
+
       <Typography className="text-lg font-semibold text-primary-main">
         {review.description}
       </Typography>
