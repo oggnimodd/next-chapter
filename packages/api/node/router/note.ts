@@ -5,10 +5,11 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
 export const noteRouter = createTRPCRouter({
-  getAll: protectedProcedure.query(({ ctx }) => {
+  getAll: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
     return ctx.prisma.note.findMany({
       where: {
         userId: ctx.auth.userId,
+        bookId: input,
       },
       include: {
         book: true,
@@ -28,7 +29,7 @@ export const noteRouter = createTRPCRouter({
   }),
   create: protectedProcedure
     .input(createNoteInput)
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       return ctx.prisma.note.create({
         data: {
           ...input,

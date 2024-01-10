@@ -43,7 +43,7 @@ const Book: FC = () => {
           <h1 className="text-2xl text-primary-main">
             {googleBooksDetails?.volumeInfo?.title || ""}
           </h1>
-          <div className="sticky top-0 bg-background-default">
+          <div className="sticky top-0 bg-background-default z-50">
             <Tabs value={currentTab} aria-label="Book Tabs">
               {tabs.map((tab) => (
                 <Tab
