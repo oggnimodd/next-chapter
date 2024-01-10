@@ -27,12 +27,9 @@ export const reviewRouter = createTRPCRouter({
     return review;
   }),
   getReviewByBook: protectedProcedure
-    .input(z.object({ reviewId: z.string(), bookId: z.string() }))
+    .input(z.string())
     .query(async ({ ctx, input }) => {
-      const review = await findReviewByBook(ctx, {
-        reviewId: input.reviewId,
-        bookId: input.bookId,
-      });
+      const review = await findReviewByBook(ctx, input);
 
       // Authorize
       await isAuthorized({
