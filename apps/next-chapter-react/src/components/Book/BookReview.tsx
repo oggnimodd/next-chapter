@@ -44,7 +44,7 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
   const handleUpdate = async (description: string) => {
     if (review) {
       try {
-        await updateReview({ id: review.id, rating, description });
+        await updateReview({ id: review.id, rating: rating || 0, description });
         toast.success("Review updated successfully");
         utils.review.invalidate();
         setIsEditMode(false);
@@ -71,7 +71,7 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
       try {
         await createReview({
           bookId,
-          rating,
+          rating: rating || 0,
           description,
         });
         toast.success("Review created successfully");
