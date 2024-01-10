@@ -117,6 +117,27 @@ export const findReview = async (
   return review;
 };
 
+export const findReviewByBook = async (
+  ctx: AuthenticatedContext,
+  { bookId, reviewId }: { bookId: string; reviewId: string },
+): Promise<Review> => {
+  const review = await ctx.prisma.review.findUnique({
+    where: {
+      id: reviewId,
+      bookId,
+    },
+  });
+
+  if (!review) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Review not found",
+    });
+  }
+
+  return review;
+};
+
 export const findNote = async (
   ctx: AuthenticatedContext,
   id: string,

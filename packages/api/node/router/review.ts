@@ -2,7 +2,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { createReviewInput, updateReviewInput } from "models";
 import { isAuthorized } from "../middlewares";
 import { z } from "zod";
-import { findReview } from "../helpers";
+import { findReview, findReviewByBook } from "../helpers";
 
 export const reviewRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
@@ -26,6 +26,22 @@ export const reviewRouter = createTRPCRouter({
 
     return review;
   }),
+  getReviewByBook: protectedProcedure
+    .input(z.object({ reviewId: z.string(), bookId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const review = await findReviewByBook(ctx, {
+        reviewId: input.reviewId,
+        bookId: input.bookId,
+      });
+
+      // Authorize
+      await isAuthorized({
+        ctx,
+        resourceUserId: review.userId,
+      });
+
+      return review;
+    }),
   create: protectedProcedure
     .input(createReviewInput)
     .mutation(async ({ ctx, input }) => {
