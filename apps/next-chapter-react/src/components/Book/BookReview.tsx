@@ -165,7 +165,12 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
       </Typography>
 
       <div>
-        <IconButton onClick={() => setIsEditMode(true)}>
+        <IconButton
+          onClick={() => {
+            setIsEditMode(true);
+            setRating(review.rating || 0);
+          }}
+        >
           <EditIcon />
         </IconButton>
         <IconButton disabled={isDeletingReview} onClick={handleDelete}>
