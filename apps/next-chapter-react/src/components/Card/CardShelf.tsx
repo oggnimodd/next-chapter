@@ -60,7 +60,7 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
       <div className="flex justify-between items-center">
         <Typography
           component={Link}
-          to={`/book/${book.id}`}
+          to={`/book/${book.id}/details`}
           className="w-2/3 line-clamp-2 font-semibold flex-0 group-hover:text-primary-main"
         >
           {book.title}
