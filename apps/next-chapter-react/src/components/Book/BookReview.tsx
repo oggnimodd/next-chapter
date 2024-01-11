@@ -60,6 +60,7 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
         await deleteReview(review.id);
         toast.success("Review deleted successfully");
         utils.review.invalidate();
+        setRating(null);
       } catch {
         toast.error("Failed to delete review");
       }
