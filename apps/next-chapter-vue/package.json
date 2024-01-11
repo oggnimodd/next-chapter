@@ -20,6 +20,7 @@
     "@vee-validate/zod": "^4.12.4",
     "@vueuse/core": "^10.6.0",
     "clsx": "^2.0.0",
+    "dompurify": "^3.0.8",
     "dotenv": "^16.3.1",
     "is-mobile": "^4.0.0",
     "material-design-icons-iconfont": "^6.7.0",

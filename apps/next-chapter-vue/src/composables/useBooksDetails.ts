@@ -1,28 +1,63 @@
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useQuery } from "@tanstack/vue-query";
 import { api } from "@/trpc";
 import { getGoogleBooksId } from "@/utils/google-books";
 import useNavigateOnError from "./useNavigateOnError";
 import { getBookDetails } from "@acme/google-books";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
+import { Shelf } from "@acme/db";
 
+// TODO : learn vue reactivity to refactor this code
 const useBooksDetails = () => {
   const router = useRouter();
-  const { id } = router.currentRoute.value.params;
-  const { data: bookDetails, isError } = useQuery({
-    queryKey: ["bookDetails", id || ""],
-    queryFn: () => api.book.get.query((id as string) || ""),
-    retry: false,
-  });
+  const route = useRoute();
+  const _id = router.currentRoute.value.params._id;
+  const id = ref<string>(Array.isArray(_id) ? _id[0] : _id);
+  const googleBooksId = ref<string | null>(null);
+  const shelf = ref<Shelf | null>(null);
 
-  const googleBooksId = getGoogleBooksId(
-    bookDetails?.value?.googleBooksUrl || "",
+  watch(
+    router.currentRoute,
+    (newVal) => {
+      if (newVal.params.id !== id.value) {
+        id.value = newVal.params.id as string;
+      }
+    },
+    { immediate: true },
   );
 
+  const { data: bookDetails, isError } = useQuery({
+    queryKey: ["bookDetails", id],
+    queryFn: async () => {
+      return api.book.get.query(id?.value || "");
+    },
+    enabled: Boolean(id),
+  });
+
+  // Watch data and update googlebooksid
+  watch(
+    bookDetails,
+    (newVal) => {
+      if (newVal) {
+        googleBooksId.value = getGoogleBooksId(newVal.googleBooksUrl as string);
+        console.log(googleBooksId.value);
+        shelf.value = newVal.shelf;
+      }
+    },
+    { immediate: true },
+  );
+
+  const isGoogleBooksIdSet = computed(() => Boolean(googleBooksId.value));
+
   const { isError: isGoogleBooksError, ...googleBooksDetails } = useQuery({
-    queryKey: ["googleBooksDetails", googleBooksId],
-    queryFn: () => getBookDetails(googleBooksId || ""),
-    enabled: Boolean(googleBooksId),
+    queryKey: ["googleBooksDetails", route.fullPath],
+    queryFn: () => {
+      if (googleBooksId.value) {
+        return getBookDetails(googleBooksId.value || "");
+      }
+      return null;
+    },
+    enabled: isGoogleBooksIdSet,
   });
 
   const combinedError = computed(
@@ -37,8 +72,8 @@ const useBooksDetails = () => {
   return {
     ...googleBooksDetails,
     isError: combinedError,
-    id,
-    shelf: bookDetails?.value?.shelf,
+    id: typeof id === "string" ? id : "",
+    shelf,
   };
 };
 
