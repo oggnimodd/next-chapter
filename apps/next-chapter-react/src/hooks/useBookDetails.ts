@@ -18,6 +18,13 @@ const useBooksDetails = () => {
     () => getBookDetails(googleBooksId || ""),
     {
       enabled: Boolean(googleBooksId),
+      retry(_failureCount, error) {
+        console.log(error);
+        if (error instanceof Error && error.message.includes("404")) {
+          return true;
+        }
+        return false;
+      },
     },
   );
 

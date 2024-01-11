@@ -32,6 +32,7 @@ const useBooksDetails = () => {
       return api.book.get.query(id?.value || "");
     },
     enabled: Boolean(id),
+    retry: false,
   });
 
   // Watch data and update googlebooksid
@@ -40,7 +41,6 @@ const useBooksDetails = () => {
     (newVal) => {
       if (newVal) {
         googleBooksId.value = getGoogleBooksId(newVal.googleBooksUrl as string);
-        console.log(googleBooksId.value);
         shelf.value = newVal.shelf;
       }
     },
