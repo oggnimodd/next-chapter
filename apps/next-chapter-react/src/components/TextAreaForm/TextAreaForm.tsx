@@ -44,10 +44,13 @@ const TextAreaForm: React.FC<TextAreaFormProps> = ({
     defaultValues: { description: initialValue },
   });
 
+  const isCreate = type === "CREATE";
+  const isEdit = type === "EDIT";
+
   const onFormSubmit = (data: FormValues) => {
     onSubmit(data.description);
 
-    if (type === "CREATE") {
+    if (isCreate) {
       reset();
     }
   };
@@ -58,12 +61,12 @@ const TextAreaForm: React.FC<TextAreaFormProps> = ({
       className="flex flex-col space-y-4"
     >
       <TextField
-        autoFocus={type === "EDIT"}
+        autoFocus={isEdit}
         multiline
         rows={4}
         {...register("description")}
         placeholder={
-          type === "CREATE" ? `Write a new ${name}...` : `Edit your ${name}...`
+          isCreate ? `Write a new ${name}...` : `Edit your ${name}...`
         }
         className={clsx(props.className, "w-full")}
         error={!!errors.description}
@@ -71,7 +74,7 @@ const TextAreaForm: React.FC<TextAreaFormProps> = ({
         {...props}
       />
       <div className="flex justify-end gap-x-2">
-        {type === "EDIT" && (
+        {isEdit && (
           <Button
             onClick={() => onCancel()}
             color="primary"
@@ -90,7 +93,7 @@ const TextAreaForm: React.FC<TextAreaFormProps> = ({
           size="small"
           startIcon={<AddIcon />}
         >
-          {type === "CREATE" ? `Create ${name}` : `Save ${name}`}
+          {isCreate ? `Create ${name}` : `Save ${name}`}
         </Button>
       </div>
     </form>
