@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { api } from "trpc";
-import { TextAreaForm } from "../TextareaForm";
+import { TextAreaForm } from "../TextAreaForm";
 import { useBookDetails } from "hooks";
 import toast from "react-hot-toast";
 import { Card, IconButton, Typography, Rating } from "@mui/material";
