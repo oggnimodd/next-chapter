@@ -1,12 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // Pages
-import { Home, NotFound, Search, Shelf } from "@/pages";
+import { Home, Book, NotFound, Search, Shelf } from "@/pages";
 
 const routes = [
   {
     path: "/",
     component: Home,
+  },
+  {
+    path: "/book/:id/:sub",
+    component: Book,
   },
   {
     path: "/shelf/:id",
