@@ -10,7 +10,7 @@
     "with-env": "dotenv -e ../../.env --",
     "storybook": "bun with-env storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "bun eslint --fix --ext .vue . && npx prettier --write ."
+    "format": "bun eslint --fix --ext .vue . && bun prettier --write ."
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
