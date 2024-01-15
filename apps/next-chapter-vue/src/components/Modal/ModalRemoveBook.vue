@@ -47,14 +47,25 @@ const handleRemove = async () => {
 </script>
 
 <template>
-  <VDialog :modelValue="opened" class="max-w-2xl" @update:modelValue="handlers.close">
+  <VDialog
+    :modelValue="opened"
+    class="max-w-2xl"
+    @update:modelValue="handlers.close"
+  >
     <VCard>
       <div>
         <h2 class="text-primary">{{ title }}</h2>
         <p class="mt-2">Are you sure to delete this book from your shelf?</p>
         <div class="flex justify-end mt-4 gap-x-2">
-          <VBtn color="primary" :disabled="isPending" @click="handlerFunctions.close">No</VBtn>
-          <VBtn color="error" :disabled="isPending" @click="handleRemove">Yes</VBtn>
+          <VBtn
+            color="primary"
+            :disabled="isPending"
+            @click="handlerFunctions.close"
+            >No</VBtn
+          >
+          <VBtn color="error" :disabled="isPending" @click="handleRemove"
+            >Yes</VBtn
+          >
         </div>
       </div>
     </VCard>

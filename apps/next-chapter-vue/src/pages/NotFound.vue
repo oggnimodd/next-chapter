@@ -4,7 +4,9 @@ import { BaseLayout } from "@/layouts";
 
 <template>
   <BaseLayout :require-auth="false">
-    <div class="flex mt-32 w-full flex-1 justify-center flex-col items-center gap-y-3">
+    <div
+      class="flex mt-32 w-full flex-1 justify-center flex-col items-center gap-y-3"
+    >
       <h1 class="font-bold">Page not found</h1>
       <router-link to="/">
         <VBtn color="primary">

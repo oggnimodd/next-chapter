@@ -144,23 +144,44 @@ watch(shelfValue.value, () => {
 </script>
 
 <template>
-  <VDialog :modelValue="opened" @update:modelValue="handlers.close" class="max-w-lg">
+  <VDialog
+    :modelValue="opened"
+    @update:modelValue="handlers.close"
+    class="max-w-lg"
+  >
     <VCard>
       <div>
         <h2 class="text-primary">{{ item.volumeInfo?.title || title }}</h2>
         <p class="line-clamp-4 mt-2">{{ item.volumeInfo?.description }}</p>
-        <VForm class="flex flex-col" v-if="!isShelvesLoading && !isError" @submit.prevent="onSubmit">
-          <VSelect class="mt-4" v-model="shelfValue.shelf" label="Choose Shelf" :items="shelves" item-value="id"
-            item-title="type">
+        <VForm
+          class="flex flex-col"
+          v-if="!isShelvesLoading && !isError"
+          @submit.prevent="onSubmit"
+        >
+          <VSelect
+            class="mt-4"
+            v-model="shelfValue.shelf"
+            label="Choose Shelf"
+            :items="shelves"
+            item-value="id"
+            item-title="type"
+          >
           </VSelect>
           <p v-if="shelfError" class="mt-2 text-sm text-error">
             {{ shelfError }}
           </p>
-          <VBtn type="submit" class="ml-auto mt-4" color="primary" :disabled="Boolean(shelfError) ||
-            addNewBookMutation.isPending.value ||
-            moveBookMutation.isPending.value
-            ">
-            {{ action === "ADD" ? "Save" : "Move" }}</VBtn>
+          <VBtn
+            type="submit"
+            class="ml-auto mt-4"
+            color="primary"
+            :disabled="
+              Boolean(shelfError) ||
+              addNewBookMutation.isPending.value ||
+              moveBookMutation.isPending.value
+            "
+          >
+            {{ action === "ADD" ? "Save" : "Move" }}</VBtn
+          >
         </VForm>
       </div>
     </VCard>
