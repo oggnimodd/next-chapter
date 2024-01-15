@@ -72,7 +72,7 @@ const useBooksDetails = () => {
   return {
     ...googleBooksDetails,
     isError: combinedError,
-    id: typeof id === "string" ? id : "",
+    id,
     shelf,
   };
 };
