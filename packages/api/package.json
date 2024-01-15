@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.12.11",
-    "@clerk/nextjs": "^4.23.2",
+    "@clerk/nextjs": "4.29.3",
     "@elysiajs/cors": "^0.7.1",
     "@elysiajs/static": "^0.7.1",
     "@elysiajs/trpc": "^0.7.0",
