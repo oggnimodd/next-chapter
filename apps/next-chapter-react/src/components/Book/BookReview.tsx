@@ -86,7 +86,13 @@ const BookReviewCardAndForm: FC<BookReviewCardAndForm> = ({ bookId }) => {
   if (isReviewLoading) return <p>Loading...</p>;
 
   const renderLabel = () => {
-    return <Typography>{rating ? labels[rating] : "No rating"}</Typography>;
+    const displayedRating = rating || review?.rating;
+
+    return (
+      <Typography>
+        {displayedRating ? labels[displayedRating] : "No rating"}
+      </Typography>
+    );
   };
 
   if (!review || error?.data?.code === "NOT_FOUND") {
