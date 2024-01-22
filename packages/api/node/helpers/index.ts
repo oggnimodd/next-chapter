@@ -1,5 +1,5 @@
 import { Book, Note, Review, Shelf } from "@acme/db";
-import { AuthenticatedContext } from "@/node/trpc";
+import type { AuthenticatedContext } from "../trpc";
 import { TRPCError } from "@trpc/server";
 
 export const findShelf = async (

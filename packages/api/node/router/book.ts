@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { updateBookInput } from "models";
+import { updateBookInput } from "../../models";
 import { TRPCError } from "@trpc/server";
 import { isAuthorized } from "../middlewares";
 import { findBook, findBooksInShelf, findShelf } from "../helpers";

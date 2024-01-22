@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { createReviewInput, updateReviewInput } from "models";
+import { createReviewInput, updateReviewInput } from "../../models";
 import { isAuthorized } from "../middlewares";
 import { z } from "zod";
 import { findReview, findReviewByBook } from "../helpers";

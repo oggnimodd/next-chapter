@@ -1,4 +1,4 @@
-import { createNoteInput, updateNoteInput } from "@/models";
+import { createNoteInput, updateNoteInput } from "../../models";
 import { findNote } from "../helpers";
 import { isAuthorized } from "../middlewares";
 import { createTRPCRouter, protectedProcedure } from "../trpc";

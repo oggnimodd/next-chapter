@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { INITIAL_SHELVES } from "models";
+import { INITIAL_SHELVES } from "../../models";
 import { TRPCError } from "@trpc/server";
 import { findShelf, findShelves } from "../helpers";
 import { isAuthorized } from "../middlewares";

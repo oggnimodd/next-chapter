@@ -128,7 +128,7 @@ const BookNotes: FC = () => {
   const handleAddNote = async (description: string) => {
     try {
       await createNote({
-        bookId: id,
+        bookId: String(id),
         description,
       });
 
