@@ -1,11 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // Pages
-import { Home, Book, NotFound, Search, Shelf, Profile } from "@/pages";
+import { Home, Book, NotFound, Search, Shelf, Profile, Landing } from "@/pages";
 
 const routes = [
   {
     path: "/",
+    component: Landing,
+  },
+  {
+    path: "/dashboard",
     component: Home,
   },
   {

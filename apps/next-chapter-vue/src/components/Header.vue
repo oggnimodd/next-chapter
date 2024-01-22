@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useUser, useAuth } from "vue-clerk";
+import { useUser, useAuth, useClerk } from "vue-clerk";
 import { VBtn, VList } from "vuetify/components";
 import { useDarkMode } from "@/composables";
+import { appearance } from "@/clerk"
 
 // Auth
 const { signOut } = useAuth();
+const { openSignIn } = useClerk();
 const { isLoaded, isSignedIn, user } = useUser();
 
 // Menu
@@ -18,7 +20,7 @@ const { isDark, toggleTheme } = useDarkMode();
 <template>
   <VAppBar color="primary">
     <VToolbar color="primary" class="container mx-auto py-4 px-6">
-      <router-link to="/">
+      <router-link :to="isSignedIn ? '/dashboard' : '/'">
         <h1 class="text-pui font-bold text-2xl text-white dark:text-primary">
           Logo
         </h1>
@@ -28,21 +30,17 @@ const { isDark, toggleTheme } = useDarkMode();
           <VBtn icon="mdi-magnify" />
         </router-link>
 
-        <VBtn
-          @click="toggleTheme"
-          :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-        />
+        <VBtn @click="toggleTheme" :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" />
+
+        <VBtn variant="text" class="text-white" v-if="isLoaded && !isSignedIn"
+          @click="() => openSignIn({ appearance, redirectUrl: '/dashboard' })">
+          Login
+        </VBtn>
 
         <VMenu v-if="isSignedIn && isLoaded" v-model="menu">
           <template v-slot:activator="{ props }">
-            <VAvatar
-              @click="menu = !menu"
-              v-bind="props"
-              role="button"
-              class="w-10 h-10"
-              aria-label="account of current user"
-              :image="user?.imageUrl"
-            />
+            <VAvatar @click="menu = !menu" v-bind="props" role="button" class="w-10 h-10"
+              aria-label="account of current user" :image="user?.imageUrl" />
           </template>
 
           <VList>
