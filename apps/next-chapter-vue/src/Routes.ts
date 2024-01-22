@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // Pages
-import { Home, Book, NotFound, Search, Shelf } from "@/pages";
+import { Home, Book, NotFound, Search, Shelf, Profile } from "@/pages";
 
 const routes = [
   {
@@ -15,6 +15,10 @@ const routes = [
   {
     path: "/shelf/:id",
     component: Shelf,
+  },
+  {
+    path: "/profile",
+    component: Profile,
   },
   {
     path: "/search",
