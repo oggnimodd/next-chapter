@@ -44,7 +44,7 @@ const { isDark, toggleTheme } = useDarkMode();
           </template>
 
           <VList>
-            <router-link to="/">
+            <router-link to="/dashboard">
               <VListItem>
                 <VListItemTitle>
                   <VIcon icon="mdi-home" class="mr-3" />
