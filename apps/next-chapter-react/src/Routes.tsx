@@ -1,4 +1,4 @@
-import { Home, Book, NotFound, Search, Shelf } from "pages";
+import { Home, Book, NotFound, Search, Shelf, Profile } from "pages";
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import {
   SignedIn,
@@ -18,6 +18,11 @@ const routes = [
   {
     path: "/",
     component: <Home />,
+    type: "protected",
+  },
+  {
+    path: "/profile",
+    component: <Profile />,
     type: "protected",
   },
   {
