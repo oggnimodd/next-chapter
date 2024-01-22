@@ -8,7 +8,9 @@
     "lint": "biome check .",
     "lint:apply": "biome check --apply .",
     "format": "biome format .",
-    "format:fix": "biome format --write ."
+    "format:fix": "biome format --write .",
+    "vue:format": "bun prettier --write '**/*.vue'",
+    "vue:lint": "bun eslint --fix --ext .vue ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -19,14 +21,25 @@
   "devDependencies": {
     "@biomejs/biome": "^1.5.0",
     "@biomejs/cli-linux-x64": "^1.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
     "cypress": "13.1.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-vue": "^9.18.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.2"
+    "lint-staged": "^13.2.2",
+    "prettier": "^3.0.3"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx}": [
       "biome check --apply .",
       "biome format --write ."
+    ],
+    "**/*.vue": [
+      "prettier --write **/*.vue"
     ]
   },
   "workspaces": [

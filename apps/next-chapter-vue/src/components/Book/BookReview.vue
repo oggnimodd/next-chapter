@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useBooksDetails } from "@/composables";
-import BookReviewCardAndForm from "./BookReviewCardAndForm.vue"
+import BookReviewCardAndForm from "./BookReviewCardAndForm.vue";
 
 const { id, isLoading, isError } = useBooksDetails();
 </script>

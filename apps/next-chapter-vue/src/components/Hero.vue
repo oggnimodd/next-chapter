@@ -15,18 +15,26 @@ const { openSignIn } = useClerk();
       <h1 className="text-3xl md:text-5xl font-bold text-primary">
         Next Chapter
       </h1>
-      <p className="text-xl">
-        The Minimalist Book Tracking App for Bookworms
-      </p>
+      <p className="text-xl">The Minimalist Book Tracking App for Bookworms</p>
       <div className="flex gap-3 md:gap-2 flex-wrap">
-
-        <VBtn class="items-center w-full md:w-auto" variant="outlined" color="primary" target="_blank"
-          href="https://github.com/oggnimodd/next-chapter">
+        <VBtn
+          class="items-center w-full md:w-auto"
+          variant="outlined"
+          color="primary"
+          target="_blank"
+          href="https://github.com/oggnimodd/next-chapter"
+        >
           <VIcon class="mr-2" icon="mdi-github" />
           Source Code
         </VBtn>
-        <VBtn class="items-center w-full md:w-auto" :onClick="() => openSignIn({ appearance, redirectUrl: ' /dashboard' })"
-          variant="elevated" color="primary">
+        <VBtn
+          class="items-center w-full md:w-auto"
+          :onClick="
+            () => openSignIn({ appearance, redirectUrl: ' /dashboard' })
+          "
+          variant="elevated"
+          color="primary"
+        >
           <VIcon class="mr-2" icon="mdi-arrow-right" />
           Get Started
         </VBtn>

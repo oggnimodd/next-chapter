@@ -3,7 +3,7 @@ import { api } from "@/trpc";
 import { useMutation, useQuery } from "@tanstack/vue-query";
 import { BookListShelfPreview } from "@/components";
 import { BaseLayout } from "@/layouts";
-import { watch } from "vue"
+import { watch } from "vue";
 import { computed } from "vue";
 
 const { mutateAsync: initialize } = useMutation({
@@ -23,7 +23,6 @@ const {
   queryFn: () => api.shelf.getAll.query(),
 });
 
-
 // Watch for shelves, it there is no shelve than generate
 watch(shelves, () => {
   if (shelves.value?.length === 0) {
@@ -38,9 +37,14 @@ const typeOrder = {
 };
 
 const sorted = computed(() => {
-  return shelves.value ? [...shelves.value].sort((a, b) => {
-    return typeOrder[a.type as keyof typeof typeOrder] - typeOrder[b.type as keyof typeof typeOrder]
-  }) : [];
+  return shelves.value
+    ? [...shelves.value].sort((a, b) => {
+        return (
+          typeOrder[a.type as keyof typeof typeOrder] -
+          typeOrder[b.type as keyof typeof typeOrder]
+        );
+      })
+    : [];
 });
 </script>
 
@@ -50,8 +54,13 @@ const sorted = computed(() => {
       <p v-if="isLoading">Loading...</p>
       <p v-else-if="isError">Error...</p>
       <!-- The key needs to be like this, since vue reactivity systems would not detect the change in the shelf.book length when moving or removing a book -->
-      <BookListShelfPreview v-for="shelf in sorted" :key="shelf.id + shelf.Book.length" :title="shelf.type"
-        :books="shelf.Book" :shelfId="shelf.id" />
+      <BookListShelfPreview
+        v-for="shelf in sorted"
+        :key="shelf.id + shelf.Book.length"
+        :title="shelf.type"
+        :books="shelf.Book"
+        :shelfId="shelf.id"
+      />
     </div>
   </BaseLayout>
 </template>

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useUser, useAuth, useClerk } from "vue-clerk";
 import { VBtn, VList } from "vuetify/components";
 import { useDarkMode } from "@/composables";
-import { appearance } from "@/clerk"
+import { appearance } from "@/clerk";
 
 // Auth
 const { signOut } = useAuth();
@@ -30,17 +30,30 @@ const { isDark, toggleTheme } = useDarkMode();
           <VBtn icon="mdi-magnify" />
         </router-link>
 
-        <VBtn @click="toggleTheme" :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'" />
+        <VBtn
+          @click="toggleTheme"
+          :icon="isDark ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+        />
 
-        <VBtn variant="text" class="text-white" v-if="isLoaded && !isSignedIn"
-          @click="() => openSignIn({ appearance, redirectUrl: '/dashboard' })">
+        <VBtn
+          variant="text"
+          class="text-white"
+          v-if="isLoaded && !isSignedIn"
+          @click="() => openSignIn({ appearance, redirectUrl: '/dashboard' })"
+        >
           Login
         </VBtn>
 
         <VMenu v-if="isSignedIn && isLoaded" v-model="menu">
           <template v-slot:activator="{ props }">
-            <VAvatar @click="menu = !menu" v-bind="props" role="button" class="w-10 h-10"
-              aria-label="account of current user" :image="user?.imageUrl" />
+            <VAvatar
+              @click="menu = !menu"
+              v-bind="props"
+              role="button"
+              class="w-10 h-10"
+              aria-label="account of current user"
+              :image="user?.imageUrl"
+            />
           </template>
 
           <VList>

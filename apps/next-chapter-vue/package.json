@@ -9,8 +9,7 @@
     "preview": "bun with-env vite preview",
     "with-env": "dotenv -e ../../.env --",
     "storybook": "bun with-env storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "format": "bun eslint --fix --ext .vue . && bun prettier --write ."
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -46,18 +45,10 @@
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^7.5.2",
     "@storybook/vue3-vite": "^7.5.2",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-vue": "^9.18.1",
     "postcss": "^8.4.31",
     "postcss-nesting": "^12.0.1",
-    "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.5.2",

@@ -1,0 +1,14 @@
+**/*.ts
+**/*.js
+**/*.tsx
+**/*.jsx
+**/*.json
+**/*.cjs
+**/*.mjs
+**/*.json
+**/*.yml
+**/*.yaml
+**/*.css
+**/*.html
+**/*.md
+**/*.mdx

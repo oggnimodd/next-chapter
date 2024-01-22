@@ -25,36 +25,55 @@ const validateSchema = z.object({
 
 type FormValues = z.infer<typeof validateSchema>;
 
-
-
 const { errors, resetForm, handleSubmit, defineField } = useForm<FormValues>({
   initialValues: { description: initialValue ?? "" },
   validationSchema: toTypedSchema(validateSchema),
-})
+});
 
 const isCreate = type === "CREATE";
 const isEdit = type === "EDIT";
 
-
-const submit = handleSubmit(values => {
-  onSubmit(values.description)
+const submit = handleSubmit((values) => {
+  onSubmit(values.description);
   if (isCreate) {
     resetForm();
   }
-})
+});
 
-const [description] = defineField("description")
+const [description] = defineField("description");
 </script>
 
 <template>
   <form @submit.prevent="submit" class="flex flex-col space-y-4">
-    <VTextarea :autofocus="isEdit" rows="4" :placeholder="isCreate ? `Write a new ${name}...` : `Edit your ${name}...`
-      " :error-messages="errors.description" class="w-full" v-model="description">
+    <VTextarea
+      :autofocus="isEdit"
+      rows="4"
+      :placeholder="
+        isCreate ? `Write a new ${name}...` : `Edit your ${name}...`
+      "
+      :error-messages="errors.description"
+      class="w-full"
+      v-model="description"
+    >
     </VTextarea>
     <div class="flex justify-end gap-x-2">
-      <VBtn size="small" v-if="isEdit" @click="onCancel" color="primary" class="self-start" variant="tonal">
-        Cancel</VBtn>
-      <VBtn size="small" :disabled="isLoading" type="submit" color="primary" class="self-start">
+      <VBtn
+        size="small"
+        v-if="isEdit"
+        @click="onCancel"
+        color="primary"
+        class="self-start"
+        variant="tonal"
+      >
+        Cancel</VBtn
+      >
+      <VBtn
+        size="small"
+        :disabled="isLoading"
+        type="submit"
+        color="primary"
+        class="self-start"
+      >
         <VIcon icon="mdi-plus" />
         {{ isCreate ? `Create ${name}` : `Save ${name}` }}
       </VBtn>
