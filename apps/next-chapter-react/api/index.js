@@ -1,1 +1,2 @@
-module.exports = require("../build/index.js");
+import app from "./build/index.js";
+export default app;
