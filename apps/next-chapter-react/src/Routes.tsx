@@ -28,7 +28,7 @@ const routes = [
   {
     path: "/search",
     component: <Search />,
-    type: "public",
+    type: "protected",
   },
   {
     path: "/book/:id/:sub",
