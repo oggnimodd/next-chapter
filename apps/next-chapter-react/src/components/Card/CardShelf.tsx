@@ -29,7 +29,7 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
   const [removeModalOpened, removeModalhandlers] = useDisclosure(false);
   const [moveModalOpened, moveModalhandlers] = useDisclosure(false);
   const { pathname } = useLocation();
-  const isHomePage = pathname === "/";
+  const isHomePage = pathname === "/dashboard";
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
