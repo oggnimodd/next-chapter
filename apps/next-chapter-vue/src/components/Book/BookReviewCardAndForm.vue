@@ -86,7 +86,10 @@ const openEditMode = () => {
 };
 
 const handleUpdate = async () => {
-  await updateReview({ bookId, id: review.value?.id, rating: rating.value });
+  await updateReview({
+    id: String(review.value?.id),
+    rating: rating.value as number,
+  });
 };
 
 const handleDelete = async () => {
