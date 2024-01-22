@@ -34,7 +34,7 @@
     "prettier": "^3.0.3"
   },
   "lint-staged": {
-    "**/*.{js,ts,jsx,tsx}": [
+    "**/*.{js,ts,jsx,tsx,json}": [
       "biome check --apply .",
       "biome format --write ."
     ],
