@@ -8,22 +8,22 @@ const Hero: FC = () => {
   const { openSignIn } = useClerk();
 
   return (
-    <div className="grid grid-cols-2 gap-20 py-8">
-      <div className="w-full flex items-center min-h-[500px]">
-        <img className="w-11/12" src="/hero.png" alt="hero" />
+    <div className="grid md:grid-cols-2 gap-5 md:gap-20 py-8">
+      <div className="w-full flex items-center md:min-h-[500px]">
+        <img className="w-full md:w-11/12" src="/hero.png" alt="hero" />
       </div>
 
-      <div className="flex justify-center flex-col gap-4">
+      <div className="flex flex-col justify-center gap-4 md:pl-4">
         <Typography
           variant="h1"
-          className="text-5xl font-bold text-primary-main"
+          className="text-3xl md:text-5xl font-bold text-primary-main"
         >
           Next Chapter
         </Typography>
-        <Typography className="text-xl">
+        <Typography className="text-base md:text-xl">
           The Minimalist Book Tracking App for Bookworms
         </Typography>
-        <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row gap-2">
           <Button
             variant="outlined"
             color="primary"
