@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
   Avatar,
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
@@ -17,12 +18,13 @@ import {
   AccountCircle,
   ExitToApp,
 } from "@mui/icons-material";
-import { useUser, useAuth } from "@clerk/clerk-react";
+import { useUser, useAuth, useClerk } from "@clerk/clerk-react";
 import { useDarkMode } from "hooks";
 
 const Header: FC = () => {
   const { toggleTheme, isDark } = useDarkMode();
   const { signOut } = useAuth();
+  const { openSignIn } = useClerk();
   const { isLoaded, isSignedIn, user } = useUser();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
@@ -39,7 +41,7 @@ const Header: FC = () => {
       <Toolbar className="container mx-auto">
         <Typography
           component={Link}
-          to="/"
+          to={isSignedIn ? "/dashboard" : "/"}
           variant="h6"
           className="dark:text-primary-main text-white font-bold text-2xl"
         >
@@ -63,6 +65,16 @@ const Header: FC = () => {
           >
             {isDark ? <LightMode /> : <DarkMode />}
           </IconButton>
+
+          {isLoaded && !isSignedIn && (
+            <Button
+              className="text-white"
+              variant="text"
+              onClick={() => openSignIn()}
+            >
+              Sign in
+            </Button>
+          )}
           {isLoaded && isSignedIn && (
             <Avatar
               className="cursor-pointer"

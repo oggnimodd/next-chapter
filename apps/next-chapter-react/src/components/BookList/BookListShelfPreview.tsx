@@ -29,7 +29,7 @@ const BookListShelfPreview: FC<CardShelfProps> = ({
           View all
         </Link>
       </div>
-      <div className="flex overflow-x-auto gap-x-3 snap-x snap-mandatory">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
         {books.length === 0 && <CardEmptyShelf />}
         {books.map((book) => (
           <CardShelf key={book.id} book={book} />

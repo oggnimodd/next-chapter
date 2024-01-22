@@ -1,24 +1,24 @@
-import { Home, Book, NotFound, Search, Shelf, Profile } from "pages";
+import { Home, Book, NotFound, Search, Shelf, Profile, Landing } from "pages";
 import { Routes as ReactRouterRoutes, Route } from "react-router-dom";
-import {
-  SignedIn,
-  SignedOut,
-  RedirectToSignIn,
-  SignIn,
-  SignUp,
-} from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignIn, SignUp } from "@clerk/clerk-react";
+import { SignedOutOnly } from "components";
 
 interface Page {
   path: string;
   component: JSX.Element;
-  type?: "public" | "protected";
+  type?: "public" | "protected" | "unauthenticated";
 }
 
 const routes = [
   {
-    path: "/",
+    path: "/dashboard",
     component: <Home />,
     type: "protected",
+  },
+  {
+    path: "/",
+    component: <Landing />,
+    type: "unauthenticated",
   },
   {
     path: "/profile",
@@ -69,13 +69,24 @@ const Routes = () => {
           );
         }
 
+        // Only accessible if user is not signed in
+        if (type === "unauthenticated") {
+          return (
+            <Route
+              element={<SignedOutOnly>{component}</SignedOutOnly>}
+              path={path}
+              key={`router-link-${path}`}
+            />
+          );
+        }
+
         return (
           <Route
             element={
               <>
                 <SignedIn>{component}</SignedIn>
                 <SignedOut>
-                  <RedirectToSignIn />
+                  <Landing showSignIn />
                 </SignedOut>
               </>
             }
