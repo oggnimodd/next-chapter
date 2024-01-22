@@ -20,7 +20,7 @@ const { title, books, shelfId } = withDefaults(
       <h2 class="text-2xl font-bold text-primary">{{ title }}</h2>
       <router-link :to="`/shelf/${shelfId}`" class="text-primary font-semibold h-full">View all</router-link>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+    <div class="flex overflow-x-auto gap-x-3 snap-x snap-mandatory">
       <CardEmptyShelf v-if="books.length === 0" />
       <CardShelf v-for="book in books" :key="book.id" :book="book" />
     </div>
