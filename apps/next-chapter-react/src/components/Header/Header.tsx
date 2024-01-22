@@ -102,7 +102,7 @@ const Header: FC = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose} component={Link} to="/">
+            <MenuItem onClick={handleClose} component={Link} to="/dashboard">
               <Home className="mr-3" />
               Dashboard
             </MenuItem>
