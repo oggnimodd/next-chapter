@@ -1,6 +1,9 @@
 # Next Chapter
 Next Chapter is a personal book tracking website application.
 
+
+![Next Chapter](./docs/main.png)
+
 ## Features
 1. User Login and Sign Up
 2. Book Search
@@ -48,3 +51,40 @@ This repository contains two versions: one built with React JS and another with 
 - Bun Monorepo
 - [Google Books API](https://developers.google.com/books/)
 - [Netlify](https://www.netlify.com) for deploying the client
+
+## Screenshots
+
+### React
+![Add Book](./docs/react/add-book.png)
+
+![Shelf](./docs/react/shelf.png)
+
+![Details](./docs/react/details.png)
+
+![Notes](./docs/react/notes.png)
+
+![Review](./docs/react/review.png)
+
+
+### Vue
+![Add Book](./docs/react/add-book.png)
+
+![Shelf](./docs/react/shelf.png)
+
+![Details](./docs/react/details.png)
+
+![Notes](./docs/react/notes.png)
+
+![Review](./docs/react/review.png)
+
+
+### Vue
+![Add Book](./docs/vue/add-book.png)
+
+![Shelf](./docs/vue/shelf.png)
+
+![Details](./docs/vue/details.png)
+
+![Notes](./docs/vue/notes.png)
+
+![Review](./docs/vue/review.png)
