@@ -32,7 +32,7 @@ const { book } = defineProps<CardShelfProps>();
   >
     <router-link :to="`/book/${book.id}/details`" class="w-full">
       <img
-        :src="book.cover || './no_cover.png'"
+        :src="book.cover || '/no_cover.png'"
         :alt="book.title"
         :class="
           clsx('w-full mb-3 object-cover w-full', {
