@@ -44,7 +44,7 @@ const { isError, isLoading, data: googleBooksDetails } = useBooksDetails();
 
     <div v-if="!isLoading && !isError">
       <div className="flex flex-col relative">
-        <h1 className="text-2xl text-primary py-5">
+        <h1 className="text-2xl text-primary py-5 w-full md:max-w-[50%]">
           {{ googleBooksDetails?.volumeInfo?.title || "" }}
         </h1>
         <div className="sticky top-0 bg-background-default z-50">
