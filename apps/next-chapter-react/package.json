@@ -12,7 +12,8 @@
     "ladle:build": "bun with-env ladle build",
     "ladle:preview": "bun with-env ladle preview",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "vercel-build": "bun ./build.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -32,6 +33,7 @@
     "bun-types": "^1.0.15",
     "clsx": "^2.0.0",
     "dompurify": "^3.0.8",
+    "esbuild": "^0.19.11",
     "framer-motion": "^10.16.4",
     "immer": "^10.0.3",
     "is-mobile": "^4.0.0",

@@ -1,5 +1,5 @@
 [build]
-  functions = "apps/next-chapter-vue/netlify/functions"
+  functions = "apps/next-chapter-react/netlify/functions"
 [functions]
   external_node_modules = ["express", "@libsql/client"]
   node_bundler = "esbuild"
