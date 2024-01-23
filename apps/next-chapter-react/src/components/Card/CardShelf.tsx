@@ -53,7 +53,7 @@ const CardShelf: FC<CardShelfProps> = ({ book }) => {
             "h-[285px]": isHomePage,
             "aspect-[1/1.4]": !isHomePage,
           })}
-          src={book.cover || "./no_cover.png"}
+          src={book.cover || "/no_cover.png"}
           alt={book.title}
         />
       </Link>
