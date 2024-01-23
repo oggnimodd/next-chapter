@@ -27,7 +27,6 @@
     "@types/cookie-parser": "^1.4.4",
     "@types/cors": "^2.8.13",
     "@types/node": "^18.17.11",
-    "add": "^2.0.6",
     "cookie-parser": "^1.4.6",
     "cookies": "^0.8.0",
     "cors": "^2.8.5",
