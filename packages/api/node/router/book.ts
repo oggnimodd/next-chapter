@@ -46,7 +46,7 @@ export const bookRouter = createTRPCRouter({
         title: z.string(),
         description: z.string().optional(),
         author: z.string().optional(),
-        cover: z.string().url().optional(),
+        cover: z.union([z.string().url().optional(), z.literal("")]),
         shelfId: z.string(),
         googleBooksUrl: z.string().optional(),
       }),
