@@ -45,7 +45,7 @@ const Header: FC = () => {
           variant="h6"
           className="dark:text-primary-main text-white font-bold text-2xl"
         >
-          Logo
+          NC-REACT
         </Typography>
         <div className="ml-auto flex gap-x-2 items-center">
           <IconButton
