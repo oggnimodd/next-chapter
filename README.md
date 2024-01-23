@@ -2,7 +2,10 @@
 Next Chapter is a personal book tracking website application.
 
 
-![Next Chapter](./docs/main.png)
+<div style="display: flex;gap: 20px">
+ <img src="./docs/hero-react.png" alt="React" width="50%"/>
+ <img src="./docs/hero-vue.png" alt="Vue" width="50%"/>
+</div>
 
 ## Features
 1. User Login and Sign Up
