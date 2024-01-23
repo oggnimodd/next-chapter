@@ -22,7 +22,7 @@ const { isDark, toggleTheme } = useDarkMode();
     <VToolbar color="primary" class="container mx-auto py-4 px-6">
       <router-link :to="isSignedIn ? '/dashboard' : '/'">
         <h1 class="text-pui font-bold text-2xl text-white dark:text-primary">
-          Logo
+          NC-VUE
         </h1>
       </router-link>
       <div class="ml-auto flex gap-x-2 items-center">
