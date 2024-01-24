@@ -45,6 +45,7 @@
   "workspaces": [
     "apps/next-chapter-react",
     "apps/next-chapter-vue",
+    "apps/next-chapter-rn",
     "packages/db",
     "packages/api",
     "packages/express-serverless",
