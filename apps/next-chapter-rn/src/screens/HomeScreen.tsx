@@ -2,8 +2,12 @@ import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { useTheme } from "@/hooks";
 import tw from "twrnc";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
 
-const HomeScreen = () => {
+const HomeScreen: React.FC<
+  NativeStackScreenProps<RootStackParamList, "HomeScreen">
+> = ({ navigation }) => {
   const { toggleTheme } = useTheme();
 
   return (
@@ -16,6 +20,13 @@ const HomeScreen = () => {
         onPress={() => toggleTheme()}
       >
         Hello world
+      </Button>
+
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate("SignInScreen")}
+      >
+        Getting Started
       </Button>
     </View>
   );
