@@ -1,5 +1,5 @@
 import { useThemeStore } from "@/stores";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   MD3DarkTheme,
   MD3LightTheme,
@@ -11,6 +11,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -36,9 +37,24 @@ const CombinedDarkTheme = {
 
 const useTheme = () => {
   const isThemeDark = useThemeStore((state) => state.isThemeDark);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+  const setIsThemeDark = useThemeStore((state) => state.setIsThemeDark);
+
+  useEffect(() => {
+    const fetchTheme = async () => {
+      const savedTheme = await AsyncStorage.getItem("theme");
+      if (savedTheme !== null) {
+        setIsThemeDark(JSON.parse(savedTheme));
+      }
+    };
+
+    fetchTheme();
+  }, []);
 
   const theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
+
+  const toggleTheme = () => {
+    setIsThemeDark(isThemeDark);
+  };
 
   return {
     isThemeDark,
