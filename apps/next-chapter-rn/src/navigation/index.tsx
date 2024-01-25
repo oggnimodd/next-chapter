@@ -21,11 +21,15 @@ const Navigation = () => {
       <Stack.Navigator initialRouteName="SignInScreen">
         {isSignedIn ? (
           <>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreen}
+              options={{ title: "Home" }}
+            />
             <Stack.Screen
               name="MyProfileScreen"
               component={MyProfileScreen}
-              options={{ title: "MyProfile" }}
+              options={{ title: "My Profile" }}
             />
           </>
         ) : (
