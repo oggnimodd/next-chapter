@@ -16,14 +16,16 @@ app.use(cors()).use(staticPlugin()).use(clerkPlugin());
 
 // Only in development
 if (process.env.NODE_ENV === "development") {
-  app.get("/panel", ({ set }) => {
-    set.headers["Content-Type"] = "text/html";
+  app.get("/panel", () => {
     const panelHtml = renderTrpcPanel(appRouter, {
       url: process.env.VITE_APP_TRPC_URL || `http://localhost:${PORT}/trpc`,
       transformer: "superjson",
     });
 
-    return injectScriptToPanel(panelHtml);
+    return injectScriptToPanel({
+      html: panelHtml,
+      staticPath: "/public",
+    });
   });
 }
 

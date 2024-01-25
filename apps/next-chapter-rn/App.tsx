@@ -8,6 +8,8 @@ import { useTheme } from "@/hooks";
 import Navigation from "@/navigation";
 import * as SecureStore from "expo-secure-store";
 import "react-native-get-random-values";
+import { TrpcProvider } from "@/trpc";
+import { ShelvesProvider } from "@/providers";
 
 const tokenCache = {
   getToken(key: string) {
@@ -36,16 +38,20 @@ export default function App() {
       tokenCache={tokenCache as any}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY as string}
     >
-      <PaperProvider theme={theme}>
-        <NavigationContainer theme={theme}>
-          <SafeAreaProvider>
-            <StatusBar style={isThemeDark ? "light" : "dark"} />
-            <QueryClientProvider client={queryClient}>
-              <Navigation />
-            </QueryClientProvider>
-          </SafeAreaProvider>
-        </NavigationContainer>
-      </PaperProvider>
+      <TrpcProvider>
+        <PaperProvider theme={theme}>
+          <NavigationContainer theme={theme}>
+            <SafeAreaProvider>
+              <StatusBar style={isThemeDark ? "light" : "dark"} />
+              <QueryClientProvider client={queryClient}>
+                <ShelvesProvider>
+                  <Navigation />
+                </ShelvesProvider>
+              </QueryClientProvider>
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </PaperProvider>
+      </TrpcProvider>
     </ClerkProvider>
   );
 }
