@@ -1,43 +1,47 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
 import { Button, Text, Avatar } from "react-native-paper";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { RootStackParamList } from "./types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import tw from "twrnc";
+import { View } from "react-native";
+import { useTheme } from "@/hooks";
 
 type Props = NativeStackScreenProps<RootStackParamList, "MyProfileScreen">;
 
 const MyProfileScreen: React.FC<Props> = ({ navigation }) => {
-  const { getToken, signOut } = useAuth();
+  const { toggleTheme, isThemeDark } = useTheme();
+  const { signOut } = useAuth();
   const { user } = useUser();
-
-  const [sessionToken, setSessionToken] = React.useState("");
 
   const onSignOutPress = async () => {
     try {
       await signOut();
-    } catch (err: any) {}
+    } catch (err: any) {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
-  React.useEffect(() => {
-    const scheduler = setInterval(async () => {
-      const token = await getToken();
-      setSessionToken(token as string);
-    }, 1000);
-
-    return () => clearInterval(scheduler);
-  }, []);
-
   return (
-    <View style={tw`flex-1 items-center justify-center gap-y-5`}>
-      <Text style={styles.title}>Hello {user?.firstName}</Text>
-      {/* Profile Picture */}
+    <View style={tw`flex-1 items-center gap-y-5 py-10 px-4`}>
+      <Text style={tw`text-2xl font-bold`}>Hello {user?.firstName}</Text>
       {user?.imageUrl && (
         <Avatar.Image source={{ uri: user?.imageUrl }} size={100} />
       )}
-
-      <Button icon="logout" onPress={onSignOutPress} mode="contained">
+      <Button
+        style={tw`w-full`}
+        icon={isThemeDark ? "lightbulb-on" : "lightbulb-off"}
+        onPress={toggleTheme}
+        mode="contained"
+      >
+        Switch Theme
+      </Button>
+      <Button
+        style={tw`w-full`}
+        icon="logout"
+        onPress={onSignOutPress}
+        mode="contained-tonal"
+      >
         Sign out
       </Button>
     </View>
@@ -45,29 +49,3 @@ const MyProfileScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 export default MyProfileScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: "#2e78b7",
-  },
-  token: {
-    marginTop: 15,
-    paddingVertical: 15,
-    fontSize: 15,
-  },
-});
