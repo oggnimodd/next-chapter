@@ -18,9 +18,10 @@ const Navigation = () => {
 
   return (
     <ClerkLoaded>
-      <Stack.Navigator initialRouteName="HomeScreen">
+      <Stack.Navigator initialRouteName="SignInScreen">
         {isSignedIn ? (
           <>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen
               name="MyProfileScreen"
               component={MyProfileScreen}
@@ -29,11 +30,6 @@ const Navigation = () => {
           </>
         ) : (
           <>
-            <Stack.Screen
-              name="HomeScreen"
-              options={{ headerShown: false }}
-              component={HomeScreen}
-            />
             <Stack.Screen
               name="SignUpScreen"
               component={SignUpScreen}

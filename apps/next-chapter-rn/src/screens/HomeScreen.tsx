@@ -24,7 +24,7 @@ const HomeScreen: React.FC<
 
       <Button
         mode="contained"
-        onPress={() => navigation.navigate("SignInScreen")}
+        onPress={() => navigation.navigate("MyProfileScreen")}
       >
         Getting Started
       </Button>

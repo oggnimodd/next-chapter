@@ -35,7 +35,7 @@ const SignInScreen: React.FC<
 
       await setActive({ session: completeSignIn.createdSessionId });
     } catch (err: any) {
-      console.log(err);
+      console.log(JSON.stringify(err));
     }
   };
 
@@ -53,7 +53,12 @@ const SignInScreen: React.FC<
       <OAuthButtons />
 
       <View style={tw`flex flex-col gap-y-2 mt-2 mb-4`}>
-        <TextInput label="Email" mode="outlined" value={emailAddress} />
+        <TextInput
+          label="Email"
+          mode="outlined"
+          onChangeText={setEmailAddress}
+          value={emailAddress}
+        />
 
         <TextInput
           label="Password"
