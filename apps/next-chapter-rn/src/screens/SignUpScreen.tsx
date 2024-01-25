@@ -24,14 +24,23 @@ const SignUpScreen: React.FC<
   const [password, setPassword] = React.useState("");
 
   const onSignUpPress = async () => {
+    console.log("calling sign up");
     if (!isLoaded) {
       return;
     }
 
+    console.log("isloaded");
+
     try {
-      await signUp.create({
+      console.log("Creating the sign up");
+      console.log({
         firstName,
         lastName,
+        emailAddress,
+        password,
+      });
+      // TODO : add first name and last name
+      await signUp.create({
         emailAddress,
         password,
       });
@@ -40,7 +49,8 @@ const SignUpScreen: React.FC<
 
       navigation.navigate("VerifyCodeScreen");
     } catch (err: any) {
-      console.log(err);
+      console.log("error");
+      console.log(JSON.stringify(err));
     }
   };
 
@@ -58,7 +68,7 @@ const SignUpScreen: React.FC<
       <OAuthButtons />
 
       <View style={tw`flex flex-col gap-y-2 mt-2 mb-4`}>
-        <TextInput
+        {/* <TextInput
           label="First Name"
           mode="outlined"
           value={firstName}
@@ -70,7 +80,7 @@ const SignUpScreen: React.FC<
           mode="outlined"
           value={lastName}
           onChangeText={(lastName) => setLastName(lastName)}
-        />
+        /> */}
 
         <TextInput
           label="Email"
