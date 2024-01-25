@@ -53,7 +53,7 @@ const useTheme = () => {
   const theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
 
   const toggleTheme = () => {
-    setIsThemeDark(isThemeDark);
+    setIsThemeDark(!isThemeDark);
   };
 
   return {

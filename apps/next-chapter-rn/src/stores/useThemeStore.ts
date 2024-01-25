@@ -13,10 +13,10 @@ type ThemeStore = ThemeState & ThemeActions;
 
 export const useThemeStore = create<ThemeStore>((set) => ({
   isThemeDark: true,
-  setIsThemeDark: async () => {
-    set(({ isThemeDark }) => {
-      AsyncStorage.setItem("theme", JSON.stringify(isThemeDark));
-      return { isThemeDark };
+  setIsThemeDark: async (newValue) => {
+    set(() => {
+      AsyncStorage.setItem("theme", JSON.stringify(newValue));
+      return { isThemeDark: newValue };
     });
   },
 }));
